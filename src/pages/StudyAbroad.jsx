@@ -1,9 +1,31 @@
 import { motion } from "framer-motion";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { FaSun, FaCloudRain, FaDollarSign, FaGraduationCap, FaPlane, FaHome } from "react-icons/fa";
 
 const StudyAbroad = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      // Add a small delay to ensure the DOM is ready
+      setTimeout(() => {
+        const id = location.hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          const headerOffset = 100; // Adjust this value based on your navbar height
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      }, 100);
+    }
+  }, [location.hash]);
 
   const countries = [
     {
@@ -170,6 +192,7 @@ const StudyAbroad = () => {
           {countries.map((country, index) => (
             <motion.section
               key={country.name}
+              id={country.name.toLowerCase().replace(/\s+/g, '-')}  // This was generating 'united-states'
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

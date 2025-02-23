@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import AnimatedLogo from "../components/AnimatedLogo";
-import { FaLinkedin, FaMapMarkerAlt, FaArrowRight, FaArrowLeft, FaFacebook, FaEnvelope } from "react-icons/fa";
+import { FaLinkedin, FaMapMarkerAlt, FaArrowRight, FaArrowLeft, FaFacebook, FaEnvelope, FaGlobeAmericas, FaGraduationCap, FaChalkboardTeacher } from "react-icons/fa";
 import founderImage from "../assets/images/Founder.jpg"; 
 import ApplicationProcess from '../components/ApplicationProcess';
 import { useRef, useState } from "react";
@@ -28,96 +28,255 @@ const Home = () => {
 
   const [isButtonVisible, setIsButtonVisible] = useState(true);
 
+  const benefits = [
+    {
+      icon: "🎯",
+      title: "Expert Guidance",
+      description: "Our experienced consultants provide personalized advice tailored to your academic goals and aspirations."
+    },
+    {
+      icon: "🌍",
+      title: "Global Network",
+      description: "Access our extensive network of top universities and educational institutions worldwide."
+    },
+    {
+      icon: "⚡",
+      title: "Streamlined Process",
+      description: "Navigate complex application procedures with ease through our structured approach."
+    },
+    {
+      icon: "💎",
+      title: "Quality Assurance",
+      description: "Benefit from our high success rate and proven track record of student placements."
+    },
+    {
+      icon: "🤝",
+      title: "Complete Support",
+      description: "From application to arrival, receive comprehensive assistance at every step."
+    },
+    {
+      icon: "🚀",
+      title: "Future Ready",
+      description: "Get guidance that prepares you for both academic success and career growth."
+    }
+  ];
+
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const [hoveredPath, setHoveredPath] = useState(null);
+
+  // Interactive paths with animations
+  const educationPaths = [
+    {
+      id: 'usa',
+      title: "Study in USA",
+      icon: FaGlobeAmericas,
+      color: "from-blue-500 to-indigo-600",
+      route: "/study-abroad#united-states"
+    },
+    {
+      id: 'uk',
+      title: "Study in UK",
+      icon: FaGraduationCap,
+      color: "from-purple-500 to-pink-600",
+      route: "/study-abroad#united-kingdom"
+    },
+    {
+      id: 'canada',
+      title: "Study in Canada",
+      icon: FaChalkboardTeacher,
+      color: "from-red-500 to-orange-600",
+      route: "/study-abroad#canada"
+    }
+  ];
+
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // Parallax effect for images
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: (e.clientX - rect.left) / rect.width,
+      y: (e.clientY - rect.top) / rect.height,
+    });
+  };
+
+  // Enhanced scroll animations
+  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const heroScale = useTransform(scrollY, [0, 400], [1, 0.95]);
+  const heroY = useTransform(scrollY, [0, 400], [0, 100]);
+  const blurStrength = useTransform(scrollY, [0, 200], [0, 8]);
+
   return (
-    <div className="relative">
-      {/* Hero Section */}
-      <div className="relative min-h-screen">
-        {/* Background with Parallax */}
+    <div className="relative bg-slate-900">
+      {/* Hero Section - Updated styling and animations */}
+      <section className="relative min-h-screen overflow-hidden">
+        {/* Background with enhanced parallax */}
         <motion.div 
-          className="absolute inset-0 z-0"
+          className="absolute inset-0"
           style={{ 
-            y: backgroundY,
-            backgroundImage: "url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            opacity: heroOpacity,
+            scale: heroScale,
+            y: heroY
           }}
         >
-          <motion.div 
-            style={{ opacity }}
-            className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-800/95 to-indigo-900/90"
+          {/* Main Background Image */}
+          <img
+            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1"
+            className="w-full h-full object-cover opacity-30"
+            alt="Background"
+          />
+          
+          {/* Updated gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-slate-900/85 to-transparent" />
+
+          {/* Enhanced gradient orbs */}
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.15, 0.35, 0.15],
+            }}
+            transition={{ duration: 8, repeat: Infinity }}
+            className="absolute top-1/4 -left-48 w-96 h-96 bg-indigo-500/40 rounded-full blur-[100px]"
+            style={{
+              filter: `blur(${Math.min(100, scrollY.get() / 5)}px)`
+            }}
+          />
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.15, 0.35, 0.15],
+            }}
+            transition={{ duration: 8, repeat: Infinity, delay: 2 }}
+            className="absolute bottom-1/4 -right-48 w-96 h-96 bg-purple-500/40 rounded-full blur-[100px]"
+            style={{
+              filter: `blur(${Math.min(100, scrollY.get() / 5)}px)`
+            }}
           />
         </motion.div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 container mx-auto px-4 py-20">
-          <div className="grid md:grid-cols-2 gap-12 items-center min-h-[calc(100vh-6rem)]">
-            {/* Left Column - About Us */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-white space-y-6"
-            >
-              <h1 className="text-5xl font-bold leading-tight">
-                Your Gateway to Global Education
-              </h1>
-              <p className="text-xl text-slate-200 leading-relaxed">
-                At Gigabyte Education Consultancy, we transform educational aspirations into reality. 
-                Our expert guidance ensures your path to international education is clear and achievable.
-              </p>
-              <div className="space-y-4 text-lg text-slate-200">
-                <div className="flex items-center space-x-3">
-                  <motion.div 
-                    className="w-2 h-2 bg-indigo-400 rounded-full"
-                    animate={{ scale: [1, 1.5, 1] }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                  />
-                  <span>Expert guidance from certified consultants</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <motion.div 
-                    className="w-2 h-2 bg-indigo-400 rounded-full"
-                    animate={{ scale: [1, 1.5, 1] }}
-                    transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
-                  />
-                  <span>Partnerships with top global universities</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <motion.div 
-                    className="w-2 h-2 bg-indigo-400 rounded-full"
-                    animate={{ scale: [1, 1.5, 1] }}
-                    transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
-                  />
-                  <span>Comprehensive visa assistance</span>
-                </div>
-              </div>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3 rounded-lg 
-                  shadow-lg transition-all duration-200 text-lg font-semibold mt-8"
-              >
-                Start Your Journey
-              </motion.button>
-            </motion.div>
-
-            {/* Right Column - 3D Logo */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex justify-center"
-            >
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-12 shadow-2xl">
-                <AnimatedLogo />
-              </div>
-            </motion.div>
+        {/* Scroll Indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          style={{ opacity: heroOpacity }}
+        >
+          <div className="flex flex-col items-center">
+            <div className="w-1 h-16 rounded-full bg-gradient-to-b from-white/20 to-transparent" />
+            <p className="text-white/50 text-sm mt-2">Scroll to explore</p>
           </div>
-        </div>
-      </div>
+        </motion.div>
 
-      {/* About Us Section */}
-      <div className="relative min-h-screen">
+        {/* Content with enhanced animations */}
+        <div className="relative z-10 container mx-auto px-4 sm:px-6">
+          <motion.div 
+            className="min-h-screen flex items-center"
+            style={{ 
+              opacity: heroOpacity,
+              scale: heroScale,
+              y: heroY
+            }}
+          >
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 w-full items-center py-20 lg:py-0">
+              {/* Left Column */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1 }}
+                className="space-y-6 lg:space-y-8 text-center lg:text-left"
+              >
+                {/* Title and Description */}
+                <div className="space-y-4 lg:space-y-6">
+                  <motion.h1 
+                    className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <span className="text-white">Transform Your</span>
+                    <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
+                      Future Globally
+                    </span>
+                  </motion.h1>
+
+                  <motion.p
+                    className="text-lg sm:text-xl text-slate-200 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    Expert guidance for your international education journey. Get personalized 
+                    support to study at top universities worldwide.
+                  </motion.p>
+                </div>
+
+                {/* CTA Buttons */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                  className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                >
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => navigate('/explore-universities')}
+                    className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 
+                      rounded-xl text-lg font-semibold text-white
+                      shadow-[0_4px_20px_rgba(79,70,229,0.3)]
+                      hover:shadow-[0_6px_24px_rgba(79,70,229,0.4)]
+                      transition-all duration-300"
+                  >
+                    Explore Universities
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => navigate('/register')}
+                    className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white 
+                      rounded-xl text-lg font-semibold backdrop-blur-sm 
+                      border border-white/10
+                      shadow-[0_4px_20px_rgba(255,255,255,0.1)]
+                      hover:shadow-[0_6px_24px_rgba(255,255,255,0.15)]
+                      transition-all duration-300"
+                  >
+                    Free Consultation
+                  </motion.button>
+                </motion.div>
+              </motion.div>
+
+              {/* Right Column - Animated Logo */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1 }}
+                className="relative hidden lg:block"
+              >
+                <AnimatedLogo />
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Seamless transition to next section */}
+      <motion.div
+        className="absolute left-0 right-0 h-32 -mt-32 bg-gradient-to-b from-transparent to-slate-900"
+        style={{
+          opacity: useTransform(scrollY, [0, 200], [0, 1])
+        }}
+      />
+
+      {/* About Section */}
+      <section className="relative min-h-screen bg-slate-900/95">
         {/* Background with Overlay */}
         <motion.div 
           className="absolute inset-0 z-0"
@@ -203,7 +362,11 @@ const Home = () => {
               </div>
               <div className="text-slate-300 space-y-6">
                 <p className="leading-relaxed">
-                Gigabyte Education Consultancy is a leading education consultancy dedicated to providing expert guidance and support to students aspiring to study abroad. With years of experience and a deep understanding of the academic landscape, we help students navigate the complex processes of university applications, visa procedures, and scholarship opportunities. Our expert team is committed to ensuring that every student receives the personalized attention and support they deserve, making their dream of studying abroad a reality.
+                  Gigabyte Education Consultancy is a leading education consultancy dedicated to providing expert guidance and 
+                  support to students aspiring to study abroad. With years of experience and a deep understanding of the academic 
+                  landscape, we help students navigate the complex processes of university applications, visa procedures, and 
+                  scholarship opportunities. Our expert team is committed to ensuring that every student receives the personalized 
+                  attention and support they deserve, making their dream of studying abroad a reality.
                 </p>
                 <div className="grid grid-cols-2 gap-6">
                   <div className="text-center p-4 rounded-xl bg-white/5">
@@ -342,140 +505,10 @@ const Home = () => {
           {/* Move ApplicationProcess outside the grid */}
           <ApplicationProcess />
         </div>
-      </div>
+      </section>
 
-      {/* Universities Preview Section */}
-      <div className="relative min-h-screen py-24">
-        {/* Enhanced Background */}
-        <motion.div 
-          className="absolute inset-0 z-0"
-          style={{ 
-            backgroundImage: `
-              linear-gradient(to right, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9)),
-              url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80')
-            `,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed"
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-slate-900/50 to-purple-900/20 opacity-75" />
-        </motion.div>
-
-        <div className="container mx-auto px-4">
-          <div className="sticky top-0 z-10 bg-slate-900/50 backdrop-blur-md py-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.8,
-                ease: "easeOut"
-              }}
-              className="text-center max-w-3xl mx-auto"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Our Partner Universities
-              </h2>
-              <p className="text-xl text-slate-300">
-                Begin your academic journey at prestigious institutions worldwide. 
-                We maintain strong partnerships with leading universities to provide 
-                you with the best educational opportunities.
-              </p>
-            </motion.div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "University of Toronto",
-                location: "Toronto, Ontario, Canada",
-                ranking: "21",
-                type: "Public",
-                description: "Canada's top-ranked university, known for research innovation and diverse student community.",
-                image: "https://images.unsplash.com/photo-1569247442329-5c793b316b36"
-              },
-              {
-                name: "University of Oxford",
-                location: "Oxford, England, UK",
-                ranking: "4",
-                type: "Public",
-                description: "The oldest university in the English-speaking world, known for academic excellence.",
-                image: "https://images.unsplash.com/photo-1526129318478-62ed807ebdf9"
-              },
-              {
-                name: "University of Melbourne",
-                location: "Melbourne, Victoria, Australia",
-                ranking: "34",
-                type: "Public",
-                description: "Australia's leading university and one of the world's finest institutions.",
-                image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be"
-              }
-            ].map((university, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ 
-                  once: true,
-                  margin: "-10%" // Triggers animation earlier
-                }}
-                transition={{ 
-                  duration: 0.8,
-                  delay: index * 0.2,
-                  ease: "easeOut"
-                }}
-                className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden 
-                  border border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer"
-                onClick={() => navigate('/explore-universities')}
-              >
-                {/* Rest of the card content remains the same */}
-                <div className="h-48 overflow-hidden">
-                  <img
-                    src={university.image}
-                    alt={university.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-2xl font-bold text-white">{university.name}</h3>
-                    <span className="bg-indigo-600 px-3 py-1 rounded-full text-sm text-white">
-                      Rank #{university.ranking}
-                    </span>
-                  </div>
-                  <p className="text-slate-300 mb-4 flex items-center">
-                    <FaMapMarkerAlt className="mr-2" />
-                    {university.location}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-slate-400">{university.type}</span>
-                    <span className="text-indigo-400 group-hover:translate-x-2 transition-transform duration-300">
-                      Learn More →
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="sticky bottom-8 z-20 text-center mt-12">
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isButtonVisible ? 1 : 0, y: isButtonVisible ? 0 : 20 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate('/explore-universities')}
-              className="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3 rounded-lg 
-                shadow-lg transition-all duration-200 text-lg font-semibold backdrop-blur-sm"
-            >
-              Explore All Universities
-            </motion.button>
-          </div>
-        </div>
-      </div>
-
-      {/* Services Preview Section */}
-      <div className="relative min-h-screen">
+      {/* Services Section */}
+      <section className="relative min-h-screen bg-slate-900">
         {/* Background with Parallax Effect */}
         <motion.div 
           className="absolute inset-0 z-0"
@@ -510,38 +543,7 @@ const Home = () => {
 
           {/* Benefits Grid */}
           <div className="grid md:grid-cols-3 gap-8 mb-20">
-            {[
-              {
-                icon: "🎯",
-                title: "Expert Guidance",
-                description: "Our experienced consultants provide personalized advice tailored to your academic goals and aspirations."
-              },
-              {
-                icon: "🌍",
-                title: "Global Network",
-                description: "Access our extensive network of top universities and educational institutions worldwide."
-              },
-              {
-                icon: "⚡",
-                title: "Streamlined Process",
-                description: "Navigate complex application procedures with ease through our structured approach."
-              },
-              {
-                icon: "💎",
-                title: "Quality Assurance",
-                description: "Benefit from our high success rate and proven track record of student placements."
-              },
-              {
-                icon: "🤝",
-                title: "Complete Support",
-                description: "From application to arrival, receive comprehensive assistance at every step."
-              },
-              {
-                icon: "🚀",
-                title: "Future Ready",
-                description: "Get guidance that prepares you for both academic success and career growth."
-              }
-            ].map((benefit, index) => (
+            {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -585,13 +587,12 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                onClick={() => navigate(`/services#${service.hash}`)}
+                transition={{ delay: index * 0.1 }}
                 className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-500/10 
                   to-purple-500/10 p-8 hover:from-indigo-500/20 hover:to-purple-500/20 transition-all duration-300
                   cursor-pointer transform hover:scale-105"
+                onClick={() => navigate(`/services#${service.hash}`)}
               >
-                <div className="text-5xl mb-4">{service.icon}</div>
                 <h3 className="text-2xl font-bold text-white mb-3">{service.title}</h3>
                 <p className="text-slate-300 mb-6">{service.description}</p>
                 <div className="absolute bottom-4 right-4 text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -601,10 +602,10 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Footer Section */}
-      <div className="relative min-h-[40vh] bg-slate-900">
+      {/* Footer */}
+      <footer className="relative bg-slate-900">
         <motion.div 
           className="absolute inset-0 z-0"
           style={{ 
@@ -623,12 +624,12 @@ const Home = () => {
         <div className="relative z-10 container mx-auto px-4 py-16">
           <div className="grid md:grid-cols-4 gap-8">
             {/* Company Info */}
-            <div className="space-y-4">
+            <div>
               <h3 className="text-2xl font-bold text-white">GIGABYTE</h3>
               <p className="text-slate-300">
                 Your trusted partner in international education, guiding students towards their academic dreams since 2016.
               </p>
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 mt-4">
                 <motion.a
                   whileHover={{ scale: 1.1 }}
                   href="https://facebook.com"
@@ -649,7 +650,6 @@ const Home = () => {
                 </motion.a>
               </div>
             </div>
-
             {/* Quick Links */}
             <div>
               <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
@@ -667,7 +667,6 @@ const Home = () => {
                 ))}
               </ul>
             </div>
-
             {/* Services */}
             <div>
               <h4 className="text-lg font-semibold text-white mb-4">Our Services</h4>
@@ -676,7 +675,7 @@ const Home = () => {
                   { name: 'University Admissions', hash: 'pre-application-services' },
                   { name: 'Visa Assistance', hash: 'visa-travel-support' },
                   { name: 'Financial Planning', hash: 'financial-support-services' },
-                  { name: 'Career Guidance', hash: 'academic-support-services' }
+                  { name: 'Career Guidance', hash: 'academic-support-services' },
                 ].map((service) => (
                   <li key={service.name}>
                     <motion.span
@@ -690,7 +689,6 @@ const Home = () => {
                 ))}
               </ul>
             </div>
-
             {/* Contact Info */}
             <div>
               <h4 className="text-lg font-semibold text-white mb-4">Contact Us</h4>
@@ -704,14 +702,13 @@ const Home = () => {
                     href="mailto:info@gigabyte-education.com" 
                     className="flex items-center space-x-3 text-slate-300 hover:text-indigo-400 transition-colors"
                   >
-                    <FaEnvelope className="text-indigo-400" />
+                    <FaEnvelope className="text-indigo-400" /> 
                     <span>info@gigabyte-education.com</span>
                   </a>
                 </li>
               </ul>
             </div>
           </div>
-
           {/* Copyright */}
           <div className="mt-16 pt-8 border-t border-slate-800">
             <motion.div
@@ -724,7 +721,7 @@ const Home = () => {
             </motion.div>
           </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 };
