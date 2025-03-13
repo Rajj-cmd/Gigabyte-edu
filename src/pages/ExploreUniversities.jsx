@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaMapMarkerAlt, FaDollarSign, FaHome } from "react-icons/fa";
+import { FaMapMarkerAlt, FaDollarSign, FaHome, FaArrowRight } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 import { universities as usaUniversities } from "../assets/data/usa";
 import { ukUniversities } from "../assets/data/uk";
@@ -9,62 +9,74 @@ import { germanUniversities } from "../assets/data/germany";
 import { canadianUniversities } from "../assets/data/canada";
 import LoadingSpinner from "../components/LoadingSpinner";
 import UniversityModal from '../components/UniversityModal';
+import Layout from '../components/Layout';
 
 const universities = {
-  USA: usaUniversities.USA || [],  // USA data is nested under USA key
-  UK: ukUniversities || [],
-  CANADA: canadianUniversities || [],
-  AUSTRALIA: australianUniversities || [],
-  GERMANY: germanUniversities || []
+  USA: Array.isArray(usaUniversities.USA) ? usaUniversities.USA : [],
+  UK: Array.isArray(ukUniversities) ? ukUniversities : [],
+  CANADA: Array.isArray(canadianUniversities) ? canadianUniversities : [],
+  AUSTRALIA: Array.isArray(australianUniversities) ? australianUniversities : [],
+  GERMANY: Array.isArray(germanUniversities) ? germanUniversities : []
 };
 
 const ExploreUniversities = () => {
-  const navigate = useNavigate();
   const location = useLocation();
+  const navigate = useNavigate();
+  const [filteredUniversities, setFilteredUniversities] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedUniversity, setSelectedUniversity] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState("All");
-  const [filteredUniversities, setFilteredUniversities] = useState([]);
 
-  // Use query params for country selection
+  // Add this utility function for shuffling arrays
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const country = params.get('country');
-    if (country) {
-      setSelectedCountry(country.toUpperCase());
+    const countryParam = params.get('country');
+    
+    if (countryParam) {
+      const normalizedCountry = countryParam.toUpperCase();
+      setSelectedCountry(normalizedCountry);
+      
+      setIsLoading(true);
+      try {
+        const universityList = normalizedCountry === "ALL"
+          ? shuffleArray(Object.values(universities).flat()) // Shuffle when showing all universities
+          : universities[normalizedCountry] || [];
+        
+        setFilteredUniversities(universityList);
+      } catch (error) {
+        console.error('Error loading universities:', error);
+        setFilteredUniversities([]);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      setSelectedCountry("ALL");
+      // Shuffle when no country is selected
+      setFilteredUniversities(shuffleArray(Object.values(universities).flat()));
+      setIsLoading(false);
     }
   }, [location.search]);
 
-  // Update filtered universities when country changes
-  useEffect(() => {
-    setIsLoading(true);
-    try {
-      let universityList = [];
-      if (selectedCountry === "All") {
-        // Flatten all university arrays
-        universityList = Object.values(universities).flat();
-      } else {
-        // Get universities for selected country
-        universityList = universities[selectedCountry] || [];
-      }
-      
-      console.log(`Loading ${universityList.length} universities for ${selectedCountry}`);
-      setFilteredUniversities(universityList);
-    } catch (error) {
-      console.error('Error loading universities:', error);
-      setFilteredUniversities([]);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [selectedCountry]);
-
   const handleCountryChange = (value) => {
-    setSelectedCountry(value);
-    // Update URL with query parameter
-    navigate(value === "All" ? '/explore-universities' : `/explore-universities?country=${value}`);
+    const normalizedValue = value.toUpperCase();
+    setSelectedCountry(normalizedValue);
+    
+    if (normalizedValue === "ALL") {
+      navigate("/explore-universities", { replace: true });
+    } else {
+      navigate(`/explore-universities?country=${normalizedValue}`, { replace: true });
+    }
   };
 
-  // Add debug check for empty state
   if (!filteredUniversities.length && !isLoading) {
     return (
       <div className="min-h-screen bg-slate-900 py-24 relative overflow-hidden">
@@ -76,102 +88,143 @@ const ExploreUniversities = () => {
     );
   }
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-slate-900 py-24">
-        <LoadingSpinner />
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-slate-900 py-24 relative overflow-hidden">
-      <div className="container mx-auto px-4 mb-16">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold text-white text-center mb-8"
-        >
-          Explore Universities
-        </motion.h1>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-2xl mx-auto mb-12"
-        >
-          <div className="bg-white/5 backdrop-blur-md rounded-xl p-4 border border-white/10">
-            <select
-              value={selectedCountry}
-              onChange={(e) => handleCountryChange(e.target.value)}
-              className="w-full bg-slate-800 text-white rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              <option value="All">All Countries</option>
-              <option value="USA">United States</option>
-              <option value="UK">United Kingdom</option>
-              <option value="CANADA">Canada</option>
-              <option value="AUSTRALIA">Australia</option>
-              <option value="GERMANY">Germany</option>
-            </select>
-          </div>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredUniversities.map((university, index) => (
-            <motion.div
-              key={`${university.name}-${index}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden 
-                border border-white/10 hover:bg-white/10 transition-all duration-300"
-            >
-              <div className="h-48 overflow-hidden">
-                <img
-                  src={university.images[0]}
-                  alt={university.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-white mb-2">{university.name}</h3>
-                <p className="text-slate-300 mb-4 flex items-center">
-                  <FaMapMarkerAlt className="mr-2" />
-                  {university.location}
-                </p>
-                <div className="space-y-2 mb-6">
-                  <div className="flex items-center text-slate-300">
-                    <FaDollarSign className="mr-2" />
-                    Tuition: ${university.tuition.toLocaleString()}/year
-                  </div>
-                  <div className="flex items-center text-slate-300">
-                    <FaHome className="mr-2" />
-                    Living Cost: ${university.livingCost.toLocaleString()}/year
-                  </div>
-                </div>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => setSelectedUniversity(university)}
-                  className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-xl font-semibold transition-all duration-200"
-                >
-                  Learn More
-                </motion.button>
-              </div>
-            </motion.div>
-          ))}
+    <Layout showMap={false}>
+      <div className="min-h-screen bg-slate-900 py-24 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 -left-48 w-96 h-96 bg-indigo-500/30 rounded-full blur-[100px]" />
+          <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-purple-500/30 rounded-full blur-[100px]" />
         </div>
-      </div>
 
-      <AnimatePresence>
-        {selectedUniversity && (
-          <UniversityModal
-            university={selectedUniversity}
-            onClose={() => setSelectedUniversity(null)}
-          />
-        )}
-      </AnimatePresence>
-    </div>
+        <div className="container mx-auto px-4 mb-16 relative z-10">
+          {/* Header Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Explore Universities
+            </h1>
+            <p className="text-xl text-slate-300">
+              Discover top universities worldwide and find your perfect educational destination
+            </p>
+          </motion.div>
+
+          {/* Filter Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-2xl mx-auto mb-16"
+          >
+            <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 shadow-xl">
+              <select
+                value={selectedCountry}
+                onChange={(e) => handleCountryChange(e.target.value)}
+                className="w-full bg-slate-800 text-white rounded-xl py-4 px-6 text-lg
+                  focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all
+                  border border-white/10 hover:border-indigo-500/50"
+              >
+                <option value="ALL">All Countries</option>
+                <option value="USA">United States</option>
+                <option value="UK">United Kingdom</option>
+                <option value="CANADA">Canada</option>
+                <option value="AUSTRALIA">Australia</option>
+                <option value="GERMANY">Germany</option>
+              </select>
+            </div>
+          </motion.div>
+
+          {/* University Cards Grid */}
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredUniversities.map((university, index) => (
+                <motion.div
+                  key={`${university.name}-${index}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group cursor-pointer"
+                >
+                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden 
+                    border border-white/10 hover:border-indigo-500/50 hover:bg-white/10 
+                    transition-all duration-300 shadow-xl hover:shadow-2xl"
+                  >
+                    {/* Image Container */}
+                    <div className="relative h-56 overflow-hidden">
+                      <img
+                        src={university.images[0]}
+                        alt={university.name}
+                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
+                    </div>
+
+                    {/* Content Container */}
+                    <div className="p-8">
+                      <h3 className="text-2xl font-bold text-white mb-3">{university.name}</h3>
+                      <p className="text-lg text-slate-300 mb-6 flex items-center">
+                        <FaMapMarkerAlt className="mr-2 text-indigo-400" />
+                        {university.location}
+                      </p>
+
+                      {/* Stats Grid */}
+                      <div className="grid grid-cols-2 gap-4 mb-8">
+                        <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                          <div className="flex items-center text-slate-300 mb-1">
+                            <FaDollarSign className="mr-2 text-indigo-400" />
+                            Tuition
+                          </div>
+                          <div className="text-xl font-bold text-white">
+                            ${university.tuition.toLocaleString()}/year
+                          </div>
+                        </div>
+                        <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                          <div className="flex items-center text-slate-300 mb-1">
+                            <FaHome className="mr-2 text-indigo-400" />
+                            Living Cost
+                          </div>
+                          <div className="text-xl font-bold text-white">
+                            ${university.livingCost.toLocaleString()}/year
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Action Button */}
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => setSelectedUniversity(university)}
+                        className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 
+                          text-white py-4 rounded-xl font-semibold text-lg
+                          transition-all duration-300 hover:shadow-lg
+                          hover:shadow-indigo-500/25 flex items-center justify-center gap-2"
+                      >
+                        Learn More
+                        <FaArrowRight className="text-sm" />
+                      </motion.button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* University Modal */}
+        <AnimatePresence>
+          {selectedUniversity && (
+            <UniversityModal
+              university={selectedUniversity}
+              onClose={() => setSelectedUniversity(null)}
+            />
+          )}
+        </AnimatePresence>
+      </div>
+    </Layout>
   );
 };
 

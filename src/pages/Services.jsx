@@ -6,6 +6,7 @@ import { FaGraduationCap, FaPassport, FaPlane, FaHome, FaFileAlt, FaBriefcase,
          FaPencilAlt, FaComments, FaUniversity, FaHeart, FaEdit, FaUserTie,
          FaLightbulb, FaCog } from "react-icons/fa";
 import AnimatedLogo from "../components/AnimatedLogo";
+import Layout from "../components/Layout";
 
 const Services = () => {
   const { section } = useParams();
@@ -165,127 +166,129 @@ const Services = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-900 py-24 relative overflow-hidden">
-      {/* Background Effect */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div 
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-          style={{ width: '200%', height: '200%' }}
-        >
-          <motion.div
-            animate={{ rotate: [0, 360] }}
-            transition={{ duration: 150, repeat: Infinity, ease: "linear" }}
-            className="w-full h-full opacity-[0.02]"
+    <Layout>
+      <div className="min-h-screen bg-slate-900 py-24 relative overflow-hidden">
+        {/* Background Effect */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div 
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+            style={{ width: '200%', height: '200%' }}
           >
-            <AnimatedLogo isBackground={true} />
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 150, repeat: Infinity, ease: "linear" }}
+              className="w-full h-full opacity-[0.02]"
+            >
+              <AnimatedLogo isBackground={true} />
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-16"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Comprehensive Study Abroad Services
+            </h1>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+              From application to graduation, we provide expert guidance and support at every step 
+              of your international education journey.
+            </p>
+          </motion.div>
+
+          {/* Service Categories */}
+          <div className="space-y-12 mb-20">
+            {serviceCategories.map((category, categoryIndex) => (
+              <motion.div
+                key={categoryIndex}
+                id={category.id}  // Use the defined ID instead of generating it
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: categoryIndex * 0.2 }}
+                className="scroll-mt-24" // Add this class for better scrolling with fixed header
+              >
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">
+                  {category.title}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {category.services.map((service, serviceIndex) => (
+                    <motion.div
+                      key={serviceIndex}
+                      className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 
+                               hover:bg-white/10 transition-all duration-300 cursor-pointer"
+                      onClick={() => setExpandedService(
+                        expandedService === `${categoryIndex}-${serviceIndex}` 
+                          ? null 
+                          : `${categoryIndex}-${serviceIndex}`
+                      )}
+                    >
+                      {/* Service Content */}
+                      <div className="flex items-start space-x-4">
+                        <div className="text-indigo-400 text-2xl mt-1">
+                          {service.icon}
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold text-white mb-2">
+                            {service.name}
+                          </h3>
+                          <AnimatePresence>
+                            {expandedService === `${categoryIndex}-${serviceIndex}` ? (
+                              <motion.p
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="text-slate-300"
+                              >
+                                {service.description}
+                              </motion.p>
+                            ) : (
+                              <p className="text-slate-300 line-clamp-2">
+                                {service.description}
+                              </p>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* CTA Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center max-w-2xl mx-auto"
+          >
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Ready to Start Your International Education Journey?
+            </h2>
+            <p className="text-slate-300 mb-8">
+              Let our experts guide you through every step of the way. Schedule a free consultation today!
+            </p>
+            <motion.button
+              onClick={() => navigate('/register')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group relative inline-flex items-center justify-center px-8 py-4 
+                       text-lg font-bold text-white bg-gradient-to-r from-indigo-600 
+                       to-purple-600 rounded-full overflow-hidden shadow-lg"
+            >
+              <span className="relative z-10">Schedule Free Consultation</span>
+              <div className="absolute inset-0 bg-white/20 translate-y-full 
+                            group-hover:translate-y-0 transition-transform duration-300" />
+            </motion.button>
           </motion.div>
         </div>
       </div>
-
-      {/* Content */}
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Comprehensive Study Abroad Services
-          </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            From application to graduation, we provide expert guidance and support at every step 
-            of your international education journey.
-          </p>
-        </motion.div>
-
-        {/* Service Categories */}
-        <div className="space-y-12 mb-20">
-          {serviceCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={categoryIndex}
-              id={category.id}  // Use the defined ID instead of generating it
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: categoryIndex * 0.2 }}
-              className="scroll-mt-24" // Add this class for better scrolling with fixed header
-            >
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">
-                {category.title}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {category.services.map((service, serviceIndex) => (
-                  <motion.div
-                    key={serviceIndex}
-                    className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 
-                             hover:bg-white/10 transition-all duration-300 cursor-pointer"
-                    onClick={() => setExpandedService(
-                      expandedService === `${categoryIndex}-${serviceIndex}` 
-                        ? null 
-                        : `${categoryIndex}-${serviceIndex}`
-                    )}
-                  >
-                    {/* Service Content */}
-                    <div className="flex items-start space-x-4">
-                      <div className="text-indigo-400 text-2xl mt-1">
-                        {service.icon}
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-white mb-2">
-                          {service.name}
-                        </h3>
-                        <AnimatePresence>
-                          {expandedService === `${categoryIndex}-${serviceIndex}` ? (
-                            <motion.p
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: "auto" }}
-                              exit={{ opacity: 0, height: 0 }}
-                              className="text-slate-300"
-                            >
-                              {service.description}
-                            </motion.p>
-                          ) : (
-                            <p className="text-slate-300 line-clamp-2">
-                              {service.description}
-                            </p>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center max-w-2xl mx-auto"
-        >
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Ready to Start Your International Education Journey?
-          </h2>
-          <p className="text-slate-300 mb-8">
-            Let our experts guide you through every step of the way. Schedule a free consultation today!
-          </p>
-          <motion.button
-            onClick={() => navigate('/register')}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="group relative inline-flex items-center justify-center px-8 py-4 
-                     text-lg font-bold text-white bg-gradient-to-r from-indigo-600 
-                     to-purple-600 rounded-full overflow-hidden shadow-lg"
-          >
-            <span className="relative z-10">Schedule Free Consultation</span>
-            <div className="absolute inset-0 bg-white/20 translate-y-full 
-                          group-hover:translate-y-0 transition-transform duration-300" />
-          </motion.button>
-        </motion.div>
-      </div>
-    </div>
+    </Layout>
   );
 };
 

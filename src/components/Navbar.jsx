@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
+import { FaBars, FaTimes, FaChevronDown, FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const Navbar = ({ onRegisterClick }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +9,47 @@ const Navbar = ({ onRegisterClick }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const handleDropdownClick = (href) => {
+    setActiveDropdown(null);
+    setIsOpen(false);
+
+    if (href.includes('#')) {
+      const [path, hash] = href.split('#');
+      
+      // If we're already on the study abroad page
+      if (location.pathname === path) {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // Navigate to the page first, then scroll
+        navigate(path);
+        setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    } else {
+      navigate(href);
+    }
+  };
+
+  const scrollToHero = () => {
+    const heroSection = document.getElementById('hero-section');
+    if (heroSection) {
+      heroSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If we're not on home page, first navigate to home then scroll
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById('hero-section')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  };
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -18,27 +59,27 @@ const Navbar = ({ onRegisterClick }) => {
       dropdown: [
         {
           name: 'Study in USA',
-          href: '/study-abroad#united-states',
+          href: '/study-abroad#united-states', // Updated hash to match ID in StudyAbroad component
           description: 'Top universities, OPT opportunities, and diverse programs',
         },
         {
           name: 'Study in UK',
-          href: '/study-abroad#united-kingdom',
+          href: '/study-abroad#united-kingdom', // Updated hash to match ID in StudyAbroad component
           description: 'Historic institutions with global recognition',
         },
         {
           name: 'Study in Canada',
-          href: '/study-abroad#canada',  // Fixed hash
+          href: '/study-abroad#canada', // Updated hash to match ID in StudyAbroad component
           description: 'Quality education with immigration pathways',
         },
         {
           name: 'Study in Australia',
-          href: '/study-abroad#australia',  // Fixed hash
+          href: '/study-abroad#australia', // Updated hash to match ID in StudyAbroad component
           description: 'World-class education in a beautiful environment',
         },
         {
           name: 'Study in Germany',
-          href: '/study-abroad#germany',  // Fixed hash
+          href: '/study-abroad#germany', // Updated hash to match ID in StudyAbroad component
           description: 'Tuition-free education in Europe\'s powerhouse',
         }
       ]
@@ -113,6 +154,27 @@ const Navbar = ({ onRegisterClick }) => {
     { name: 'Contact', href: '/contact' }
   ];
 
+  const socialLinks = [
+    { 
+      icon: <FaFacebook />, 
+      href: "https://www.facebook.com/profile.php?id=61557666615964", 
+      label: "Facebook",
+      color: "hover:text-blue-500" 
+    },
+    { 
+      icon: <FaInstagram />, 
+      href: "https://www.instagram.com/gigabyte_education?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", 
+      label: "Instagram",
+      color: "hover:text-pink-500" 
+    },
+    { 
+      icon: <FaWhatsapp />, 
+      href: "https://wa.me/9779767659319",
+      label: "WhatsApp",
+      color: "hover:text-green-500" 
+    }
+  ];
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -121,39 +183,55 @@ const Navbar = ({ onRegisterClick }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleDropdownClick = (href) => {
-    setActiveDropdown(null);
-    setIsOpen(false);
-    // Instead of using navigate directly, parse the URL first
-    if (href.includes('?')) {
-      const [path, query] = href.split('?');
-      const params = new URLSearchParams(query);
-      const country = params.get('country');
-      // Use the parsed country parameter
-      navigate(`/explore-universities?country=${country}`);
-    } else {
-      navigate(href);
-    }
-  };
-
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
       isScrolled ? 'bg-slate-800/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          {/* Logo - Adjusted for mobile */}
+          {/* Updated Logo section with hover animation */}
           <div className="flex items-center">
-            <Link to="/" className="flex-shrink-0">
+            <motion.button 
+              onClick={scrollToHero} 
+              className="flex-shrink-0 relative cursor-pointer group"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
               <div className="flex flex-col">
-                <span className="text-lg sm:text-xl font-bold text-white tracking-wide">Gigabyte</span>
-                <span className="text-xs sm:text-sm text-indigo-400 font-medium">Education Consultancy</span>
+                <span className="text-lg sm:text-xl font-bold text-white tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-indigo-400 group-hover:via-purple-400 group-hover:to-pink-400 transition-all duration-300">
+                  Gigabyte
+                </span>
+                <span className="text-xs sm:text-sm text-indigo-400 font-medium group-hover:text-indigo-300 transition-colors duration-300">
+                  Education Consultancy
+                </span>
               </div>
-            </Link>
+              <motion.div
+                className="absolute -inset-x-2 -inset-y-1 bg-white/5 rounded-lg opacity-0 group-hover:opacity-100 -z-10"
+                initial={false}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.button>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-6">
+            {/* Social Media Icons */}
+            <div className="flex items-center space-x-4 mr-6 border-r border-white/10 pr-6">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1 }}
+                  className={`text-white/70 transition-colors duration-200 ${social.color}`}
+                  aria-label={social.label}
+                >
+                  {social.icon}
+                </motion.a>
+              ))}
+            </div>
+
             {navigation.map((item) => (
               <div key={item.name} 
                    className="relative"
@@ -194,19 +272,19 @@ const Navbar = ({ onRegisterClick }) => {
               </div>
             ))}
             
-            {/* Updated Register Button */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            {/* Desktop Register Button - Updated with blue glow */}
+            <button
               onClick={onRegisterClick}
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 
-                text-white px-8 py-2.5 rounded-xl text-sm font-semibold 
-                transition-all duration-200 shadow-[0_4px_20px_rgba(79,70,229,0.3)]
-                hover:shadow-[0_6px_24px_rgba(79,70,229,0.4)]
-                border border-white/10"
+              className="relative inline-flex items-center justify-center px-8 py-2.5 
+                text-sm font-semibold text-white overflow-hidden rounded-xl
+                transition-all duration-300 ease-out
+                bg-blue-600 hover:bg-blue-500
+                shadow-[0_0_15px_rgba(37,99,235,0.3)]
+                hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]
+                focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-800"
             >
-              Register Now
-            </motion.button>
+              <span className="relative z-20">Register Now</span>
+            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -232,6 +310,22 @@ const Navbar = ({ onRegisterClick }) => {
             style={{ maxHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}
           >
             <div className="px-2 pt-2 pb-3 space-y-1 max-h-[80vh] overflow-y-auto">
+              {/* Social Media Icons for Mobile */}
+              <div className="flex justify-center space-x-6 py-4 border-b border-white/10 mb-4">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-white/70 transition-colors duration-200 ${social.color}`}
+                    aria-label={social.label}
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+
               {navigation.map((item) => (
                 <div key={item.name}>
                   <button
@@ -262,15 +356,20 @@ const Navbar = ({ onRegisterClick }) => {
                 </div>
               ))}
               
+              {/* Mobile Register Button - Updated with blue glow */}
               <button
                 onClick={() => {
                   setIsOpen(false);
                   onRegisterClick();
                 }}
-                className="w-full bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 
-                  rounded-lg text-sm font-medium transition-colors duration-200 mt-4"
+                className="w-full relative inline-flex items-center justify-center px-6 py-3
+                  text-sm font-semibold text-white overflow-hidden rounded-xl
+                  transition-all duration-300 ease-out
+                  bg-blue-600 hover:bg-blue-500
+                  shadow-[0_0_15px_rgba(37,99,235,0.3)]
+                  hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]"
               >
-                Register Now
+                <span className="relative z-20">Register Now</span>
               </button>
             </div>
           </motion.div>

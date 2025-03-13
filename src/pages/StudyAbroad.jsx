@@ -1,31 +1,9 @@
 import { motion } from "framer-motion";
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaSun, FaCloudRain, FaDollarSign, FaGraduationCap, FaPlane, FaHome } from "react-icons/fa";
 
 const StudyAbroad = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.hash) {
-      // Add a small delay to ensure the DOM is ready
-      setTimeout(() => {
-        const id = location.hash.replace('#', '');
-        const element = document.getElementById(id);
-        if (element) {
-          const headerOffset = 100; // Adjust this value based on your navbar height
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
-        }
-      }, 100);
-    }
-  }, [location.hash]);
 
   const countries = [
     {
@@ -177,7 +155,6 @@ const StudyAbroad = () => {
 
   return (
     <div className="min-h-screen bg-slate-900 py-24">
-      {/* Hero Section */}
       <div className="container mx-auto px-4">
         <motion.h1 
           initial={{ opacity: 0, y: -20 }}
@@ -187,19 +164,17 @@ const StudyAbroad = () => {
           Study Abroad Destinations
         </motion.h1>
 
-        {/* Country Sections */}
         <div className="space-y-32">
           {countries.map((country, index) => (
             <motion.section
               key={country.name}
-              id={country.name.toLowerCase().replace(/\s+/g, '-')}  // This was generating 'united-states'
+              id={country.name.toLowerCase().replace(' ', '-')}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              {/* Country Header */}
               <div className="relative h-[400px] rounded-3xl overflow-hidden mb-12">
                 <div 
                   className="absolute inset-0 bg-cover bg-center"
@@ -216,9 +191,7 @@ const StudyAbroad = () => {
                 </div>
               </div>
 
-              {/* Info Grid */}
               <div className="grid md:grid-cols-2 gap-8 mb-12">
-                {/* Living Costs */}
                 <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
                   <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
                     <FaDollarSign className="text-indigo-400 mr-2" />
@@ -232,7 +205,6 @@ const StudyAbroad = () => {
                   </div>
                 </div>
 
-                {/* Weather */}
                 <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
                   <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
                     <FaSun className="text-indigo-400 mr-2" />
@@ -246,7 +218,6 @@ const StudyAbroad = () => {
                 </div>
               </div>
 
-              {/* Pros & Cons */}
               <div className="grid md:grid-cols-2 gap-8 mb-12">
                 <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
                   <h3 className="text-2xl font-bold text-white mb-6">Pros</h3>
@@ -272,7 +243,6 @@ const StudyAbroad = () => {
                 </div>
               </div>
 
-              {/* Top Universities */}
               <div className="mb-12">
                 <h3 className="text-2xl font-bold text-white mb-6">Featured Universities</h3>
                 <div className="grid md:grid-cols-3 gap-6">
@@ -292,7 +262,6 @@ const StudyAbroad = () => {
                 </div>
               </div>
 
-              {/* Divider */}
               {index < countries.length - 1 && (
                 <div className="w-full h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
               )}

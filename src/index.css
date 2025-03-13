@@ -45,6 +45,16 @@ body {
   --tw-drop-shadow: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
   filter: var(--tw-drop-shadow);
 }
+
+/* Add these new styles for enhanced text visibility */
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.5));
+}
+
+.drop-shadow-lg {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 @keyframes spin-slow {
   from {
     transform: rotate(0deg);

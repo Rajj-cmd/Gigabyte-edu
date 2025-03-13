@@ -9,6 +9,7 @@ import Services from "./pages/Services";
 import Modal from "./components/Modal";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
+import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
@@ -31,21 +32,23 @@ function App() {
   };
 
   return (
-    <div>
-      <Navbar onRegisterClick={handleRegisterClick} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/study-abroad" element={<StudyAbroad />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/explore-universities/*" element={<ExploreUniversities />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+    <HelmetProvider>
+      <div>
+        <Navbar onRegisterClick={handleRegisterClick} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/study-abroad" element={<StudyAbroad />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/explore-universities" element={<ExploreUniversities />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
 
-      <Modal isOpen={isRegisterOpen} onClose={handleRegisterClose}>
-        <Register onClose={handleRegisterClose} />
-      </Modal>
-    </div>
+        <Modal isOpen={isRegisterOpen} onClose={handleRegisterClose}>
+          <Register onClose={handleRegisterClose} />
+        </Modal>
+      </div>
+    </HelmetProvider>
   );
 }
 
