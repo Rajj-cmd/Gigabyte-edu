@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaFacebook, FaWhatsapp, FaLinkedin } from "react-icons/fa";
+import Layout from '../components/Layout';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -37,92 +38,21 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 py-24">
-      <div className="container mx-auto px-4">
-        {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Get in Touch
-          </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Have questions about studying abroad? We're here to help you every step of the way.
-          </p>
-        </motion.div>
-
-        {/* Contact Grid */}
-        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Information */}
+    <Layout>
+      <div className="min-h-screen bg-slate-900 py-24">
+        <div className="container mx-auto px-4">
+          {/* Header Section */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="space-y-8"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-16"
           >
-            <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
-              <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="bg-indigo-600/20 p-3 rounded-lg">
-                    <FaEnvelope className="text-indigo-400 text-xl" />
-                  </div>
-                  <div>
-                    <h3 className="text-white font-semibold mb-1">Email</h3>
-                    <a href="mailto:info@gigabyte-education.com" className="text-slate-300 hover:text-indigo-400 transition-colors">
-                      info@gigabyte-education.com
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="bg-indigo-600/20 p-3 rounded-lg">
-                    <FaPhone className="text-indigo-400 text-xl" />
-                  </div>
-                  <div>
-                    <h3 className="text-white font-semibold mb-1">Phone</h3>
-                    <a href="tel:+1234567890" className="text-slate-300 hover:text-indigo-400 transition-colors">
-                      +1 (123) 456-7890
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="bg-indigo-600/20 p-3 rounded-lg">
-                    <FaMapMarkerAlt className="text-indigo-400 text-xl" />
-                  </div>
-                  <div>
-                    <h3 className="text-white font-semibold mb-1">Address</h3>
-                    <p className="text-slate-300">
-                      123 Education Street<br />
-                      Tech City, TC 12345
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Media Links */}
-              <div className="mt-8 pt-8 border-t border-white/10">
-                <h3 className="text-white font-semibold mb-4">Connect With Us</h3>
-                <div className="flex space-x-4">
-                  {[
-                    { icon: <FaFacebook />, href: "https://facebook.com" },
-                    { icon: <FaWhatsapp />, href: "https://wa.me/1234567890" },
-                    { icon: <FaLinkedin />, href: "https://linkedin.com" }
-                  ].map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white/5 p-3 rounded-lg hover:bg-white/10 transition-colors text-indigo-400 hover:text-indigo-300"
-                    >
-                      {social.icon}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Get in Touch
+            </h1>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+              Have questions about studying abroad? We're here to help you every step of the way.
+            </p>
           </motion.div>
 
           {/* Contact Form */}
@@ -130,6 +60,7 @@ const Contact = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
+            className="max-w-3xl mx-auto"
           >
             <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
               <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
@@ -212,7 +143,7 @@ const Contact = () => {
           </motion.div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

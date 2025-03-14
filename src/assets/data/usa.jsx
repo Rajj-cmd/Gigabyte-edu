@@ -75,10 +75,6 @@ import psuCampus from '../images/USA/Portland State University/campus.jpg';
 import psuLibrary from '../images/USA/Portland State University/library.jpg';
 import psuStudentLife from '../images/USA/Portland State University/student-life.jpg';
 
-import ucfCampus from '../images/USA/University of Central Florida/campus.jpg';
-import ucfLibrary from '../images/USA/University of Central Florida/library.jpg';
-import ucfStudentLife from '../images/USA/University of Central Florida/student-life.jpg';
-
 import untCampus from '../images/USA/University of North Texas/campus.jpg';
 import untLibrary from '../images/USA/University of North Texas/library.jpg';
 import untStudentLife from '../images/USA/University of North Texas/student-life.jpg';
@@ -294,22 +290,6 @@ export const universities = {
       ],
       programs: ["Nursing", "Business", "Education", "Liberal Arts"],
       features: ["Small Class Sizes", "Strong Community", "Personalized Education", "Liberal Arts Tradition"]
-    },
-    {
-      "name": "University of Central Florida",
-      "location": "Orlando, Florida, USA",
-      "tuition": 16630,
-      "livingCost": 20000,
-      "description": "One of the largest universities in the U.S., known for its strong engineering, business, and computer science programs.",
-      "ranking": "124",
-      "type": "Public",
-      "images": [
-        ucfCampus,
-        ucfLibrary,
-        ucfStudentLife
-      ],
-      "programs": ["Computer Science", "Business", "Engineering", "Hospitality Management"],
-      "features": ["High Research Activity", "Large Student Body", "Innovation & Technology", "Orlando Location"]
     },
     {
       "name": "George Mason University",

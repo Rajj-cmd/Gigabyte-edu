@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import { FaSun, FaCloudRain, FaDollarSign, FaGraduationCap, FaPlane, FaHome } from "react-icons/fa";
+import Layout from '../components/Layout';
 
 const StudyAbroad = () => {
   const navigate = useNavigate();
@@ -154,122 +155,124 @@ const StudyAbroad = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-900 py-24">
-      <div className="container mx-auto px-4">
-        <motion.h1 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold text-white text-center mb-12"
-        >
-          Study Abroad Destinations
-        </motion.h1>
+    <Layout>
+      <div className="min-h-screen bg-slate-900 py-24">
+        <div className="container mx-auto px-4">
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-5xl font-bold text-white text-center mb-12"
+          >
+            Study Abroad Destinations
+          </motion.h1>
 
-        <div className="space-y-32">
-          {countries.map((country, index) => (
-            <motion.section
-              key={country.name}
-              id={country.name.toLowerCase().replace(' ', '-')}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative"
-            >
-              <div className="relative h-[400px] rounded-3xl overflow-hidden mb-12">
-                <div 
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${country.image})` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                    {country.name}
-                  </h2>
-                  <p className="text-xl text-slate-300">
-                    {country.description}
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
-                  <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
-                    <FaDollarSign className="text-indigo-400 mr-2" />
-                    Living Costs
-                  </h3>
-                  <div className="space-y-4 text-slate-300">
-                    <p><strong>Monthly Average:</strong> {country.livingCost.monthly}</p>
-                    <p><strong>Accommodation:</strong> {country.livingCost.rent}</p>
-                    <p><strong>Food:</strong> {country.livingCost.food}</p>
-                    <p><strong>Transport:</strong> {country.livingCost.transport}</p>
+          <div className="space-y-32">
+            {countries.map((country, index) => (
+              <motion.section
+                key={country.name}
+                id={country.name.toLowerCase().replace(' ', '-')}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="relative"
+              >
+                <div className="relative h-[400px] rounded-3xl overflow-hidden mb-12">
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${country.image})` }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50" />
+                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                      {country.name}
+                    </h2>
+                    <p className="text-xl text-slate-300">
+                      {country.description}
+                    </p>
                   </div>
                 </div>
 
-                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
-                  <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
-                    <FaSun className="text-indigo-400 mr-2" />
-                    Weather
-                  </h3>
-                  <div className="space-y-4 text-slate-300">
-                    <p><strong>Summer:</strong> {country.weather.summer}</p>
-                    <p><strong>Winter:</strong> {country.weather.winter}</p>
-                    <p><strong>Overview:</strong> {country.weather.description}</p>
+                <div className="grid md:grid-cols-2 gap-8 mb-12">
+                  <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                    <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+                      <FaDollarSign className="text-indigo-400 mr-2" />
+                      Living Costs
+                    </h3>
+                    <div className="space-y-4 text-slate-300">
+                      <p><strong>Monthly Average:</strong> {country.livingCost.monthly}</p>
+                      <p><strong>Accommodation:</strong> {country.livingCost.rent}</p>
+                      <p><strong>Food:</strong> {country.livingCost.food}</p>
+                      <p><strong>Transport:</strong> {country.livingCost.transport}</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                    <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+                      <FaSun className="text-indigo-400 mr-2" />
+                      Weather
+                    </h3>
+                    <div className="space-y-4 text-slate-300">
+                      <p><strong>Summer:</strong> {country.weather.summer}</p>
+                      <p><strong>Winter:</strong> {country.weather.winter}</p>
+                      <p><strong>Overview:</strong> {country.weather.description}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
-                  <h3 className="text-2xl font-bold text-white mb-6">Pros</h3>
-                  <ul className="space-y-3">
-                    {country.pros.map((pro, idx) => (
-                      <li key={idx} className="flex items-center text-slate-300">
-                        <span className="w-2 h-2 bg-green-400 rounded-full mr-3" />
-                        {pro}
-                      </li>
+                <div className="grid md:grid-cols-2 gap-8 mb-12">
+                  <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                    <h3 className="text-2xl font-bold text-white mb-6">Pros</h3>
+                    <ul className="space-y-3">
+                      {country.pros.map((pro, idx) => (
+                        <li key={idx} className="flex items-center text-slate-300">
+                          <span className="w-2 h-2 bg-green-400 rounded-full mr-3" />
+                          {pro}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                    <h3 className="text-2xl font-bold text-white mb-6">Cons</h3>
+                    <ul className="space-y-3">
+                      {country.cons.map((con, idx) => (
+                        <li key={idx} className="flex items-center text-slate-300">
+                          <span className="w-2 h-2 bg-red-400 rounded-full mr-3" />
+                          {con}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="mb-12">
+                  <h3 className="text-2xl font-bold text-white mb-6">Featured Universities</h3>
+                  <div className="grid md:grid-cols-3 gap-6">
+                    {country.universities.map((uni, idx) => (
+                      <motion.div
+                        key={idx}
+                        whileHover={{ scale: 1.05 }}
+                        className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 
+                          cursor-pointer hover:bg-white/10 transition-all duration-300"
+                        onClick={() => navigate(`/explore-universities?country=${country.name}&university=${uni}`)}
+                      >
+                        <FaGraduationCap className="text-3xl text-indigo-400 mb-4" />
+                        <h4 className="text-xl font-bold text-white mb-2">{uni}</h4>
+                        <p className="text-slate-300">Click to explore details</p>
+                      </motion.div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
-                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
-                  <h3 className="text-2xl font-bold text-white mb-6">Cons</h3>
-                  <ul className="space-y-3">
-                    {country.cons.map((con, idx) => (
-                      <li key={idx} className="flex items-center text-slate-300">
-                        <span className="w-2 h-2 bg-red-400 rounded-full mr-3" />
-                        {con}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
 
-              <div className="mb-12">
-                <h3 className="text-2xl font-bold text-white mb-6">Featured Universities</h3>
-                <div className="grid md:grid-cols-3 gap-6">
-                  {country.universities.map((uni, idx) => (
-                    <motion.div
-                      key={idx}
-                      whileHover={{ scale: 1.05 }}
-                      className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 
-                        cursor-pointer hover:bg-white/10 transition-all duration-300"
-                      onClick={() => navigate(`/explore-universities?country=${country.name}&university=${uni}`)}
-                    >
-                      <FaGraduationCap className="text-3xl text-indigo-400 mb-4" />
-                      <h4 className="text-xl font-bold text-white mb-2">{uni}</h4>
-                      <p className="text-slate-300">Click to explore details</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {index < countries.length - 1 && (
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
-              )}
-            </motion.section>
-          ))}
+                {index < countries.length - 1 && (
+                  <div className="w-full h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
+                )}
+              </motion.section>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

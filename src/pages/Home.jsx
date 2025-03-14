@@ -11,11 +11,11 @@ import { australianUniversities } from "../assets/data/australia";
 import { germanUniversities } from "../assets/data/germany";
 import { canadianUniversities } from "../assets/data/canada";
 import AnimatedBackground from '../components/AnimatedBackground';
-import NavigationIndicator from '../components/NavigationIndicator';
-import Layout from '../components/Layout'; // Add this import
+import Layout from '../components/Layout';
+import SEO from '../components/SEO';
 
 const Home = () => {
-  const navigate = useNavigate();  // Add this
+  const navigate = useNavigate();
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], ['0%', '20%']);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -121,26 +121,25 @@ const Home = () => {
     }
   ];
 
-  // Single timer effect for auto-sliding
+  // Auto-slide effect
   useEffect(() => {
     const timer = setInterval(() => {
       if (isAutoPlaying) {
         setCurrentDestination(prev => (prev + 1) % featuredDestinations.length);
       }
-    }, 6000); // Set to exactly 6 seconds
+    }, 6000);
 
     return () => clearInterval(timer);
   }, [isAutoPlaying, featuredDestinations.length]);
 
-  // Simplified slide change handler
+  // Slide change handler
   const handleSlideChange = (index) => {
     setCurrentDestination(index);
     setIsAutoPlaying(false);
-    setTimeout(() => setIsAutoPlaying(true), 6000); // Match the interval time
+    setTimeout(() => setIsAutoPlaying(true), 6000);
   };
 
   const handleLearnMoreClick = (destination) => {
-    // Update the mapping to match exactly with StudyAbroad section IDs
     const sectionMap = {
       "Study in USA": "united-states",
       "Study in UK": "united-kingdom",
@@ -152,7 +151,6 @@ const Home = () => {
     const sectionId = sectionMap[destination];
     navigate(`/study-abroad#${sectionId}`);
 
-    // Add a small delay to ensure the navigation completes before scrolling
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -161,7 +159,7 @@ const Home = () => {
     }, 100);
   };
 
-  // Simplified render function for Featured Destinations
+  // Render Featured Destinations
   const renderFeaturedDestinations = () => (
     <section className="relative min-h-screen bg-slate-900">
       <div className="absolute inset-0 overflow-hidden">
@@ -268,7 +266,7 @@ const Home = () => {
     </section>
   );
 
-  // Add this new function to get featured universities
+  // Get Featured Universities
   const getFeaturedUniversities = () => {
     const allUniversities = [
       ...usaUniversities.USA || [],
@@ -278,16 +276,14 @@ const Home = () => {
       ...canadianUniversities || []
     ];
     
-    // Get 3 random universities
     return allUniversities
       .sort(() => 0.5 - Math.random())
       .slice(0, 3);
   };
 
-  // Add state for featured universities
   const [featuredUniversities] = useState(getFeaturedUniversities());
 
-  // Add this new section render function
+  // Render Featured Universities
   const renderFeaturedUniversities = () => (
     <section className="relative bg-slate-900 py-24">
       <div className="container mx-auto px-4">
@@ -379,17 +375,22 @@ const Home = () => {
     </section>
   );
 
-  // Update refs and IDs for each section
   return (
-    <Layout showMap={true}>  {/* Changed back to true to show map at bottom */}
+    <Layout>
+      <SEO 
+        title="Gigabyte Education Consultancy - Home" 
+        description="Gigabyte Education Consultancy provides expert guidance for students aspiring to study abroad. Explore top universities and get personalized support." 
+        keywords="education consultancy, study abroad, university applications, visa support, scholarships, consultancy in Nepal, apply abroad" 
+        author="Gigabyte Education Consultancy"
+      />
       <div className="relative">
         <AnimatedBackground />
-        <NavigationIndicator />
+        {/* Remove NavigationIndicator */}
+        {/* <NavigationIndicator /> */}
 
         {/* Hero Section */}
         <section id="hero" className="relative min-h-screen">
           <div className="relative min-h-screen">
-            {/* Background with Parallax */}
             <motion.div 
               className="absolute inset-0 z-0"
               style={{ 
@@ -405,10 +406,8 @@ const Home = () => {
               />
             </motion.div>
 
-            {/* Hero Content */}
             <div className="relative z-10 container mx-auto px-4 py-20">
               <div className="grid md:grid-cols-2 gap-12 items-center min-h-[calc(100vh-6rem)]">
-                {/* Left Column - About Us */}
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -457,7 +456,6 @@ const Home = () => {
                     </motion.button>
                 </motion.div>
 
-                {/* Right Column - 3D Logo */}
                 <motion.div
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -474,7 +472,6 @@ const Home = () => {
         {/* About Section */}
         <section id="about" className="relative min-h-screen">
           <div className="relative min-h-screen">
-            {/* Background with Overlay */}
             <motion.div 
               className="absolute inset-0 z-0"
               style={{ 
@@ -489,11 +486,8 @@ const Home = () => {
               />
             </motion.div>
 
-            {/* About Content */}
             <div className="relative z-10 container mx-auto px-4 py-20">
-              {/* Fix the About Us section structure */}
               <div className="grid md:grid-cols-2 gap-16 items-start">
-                {/* Founder Section */}
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -513,7 +507,7 @@ const Home = () => {
                     <h2 className="text-3xl font-bold text-white mb-2">Suman Pathak</h2>
                     <p className="text-indigo-300 font-semibold">Founder & Lead Consultant</p>
                     <a 
-                      href="https://www.linkedin.com/in/suman-pathak-702165276/" // Updated LinkedIn URL
+                      href="https://www.linkedin.com/in/suman-pathak-702165276/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mt-4 inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors"
@@ -543,7 +537,6 @@ const Home = () => {
                   </div>
                 </motion.div>
 
-                {/* Company Section */}
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -598,7 +591,6 @@ const Home = () => {
         <section id="process" className="relative min-h-screen">
           <ApplicationProcess />
         </section>
-
       </div>
     </Layout>
   );
