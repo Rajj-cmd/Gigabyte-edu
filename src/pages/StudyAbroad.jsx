@@ -1,7 +1,16 @@
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
-import { FaSun, FaCloudRain, FaDollarSign, FaGraduationCap, FaPlane, FaHome } from "react-icons/fa";
-import Layout from '../components/Layout';
+import { FaSun, FaDollarSign, FaGraduationCap } from "react-icons/fa";
+import Layout from "../components/Layout";
+import AnimatedLogo from "../components/AnimatedLogo";
+import PropTypes from 'prop-types';
+
+// Import universities from data files directly
+import { universities as usaUniversities } from "../assets/data/usa";
+import { ukUniversities } from "../assets/data/uk";
+import { australianUniversities } from "../assets/data/australia";
+import { germanUniversities } from "../assets/data/germany";
+import { canadianUniversities } from "../assets/data/canada";
 
 const StudyAbroad = () => {
   const navigate = useNavigate();
@@ -34,7 +43,11 @@ const StudyAbroad = () => {
         "Strict visa requirements",
         "High living costs in major cities"
       ],
-      universities: ["Massachusetts Institute of Technology", "Stanford University", "Harvard University"]
+      universities: usaUniversities.USA.slice(0, 3).map(uni => ({
+        name: uni.name,
+        description: uni.description,
+        image: uni.images[0]
+      }))
     },
     {
       name: "United Kingdom",
@@ -63,7 +76,11 @@ const StudyAbroad = () => {
         "Limited work opportunities after graduation",
         "Brexit implications"
       ],
-      universities: ["University of Oxford", "University of Cambridge", "Imperial College London"]
+      universities: ukUniversities.slice(0, 3).map(uni => ({
+        name: uni.name,
+        description: uni.description,
+        image: uni.images[0]
+      }))
     },
     {
       name: "Canada",
@@ -92,7 +109,11 @@ const StudyAbroad = () => {
         "Limited housing in popular areas",
         "Distance between major cities"
       ],
-      universities: ["University of Toronto", "McGill University", "University of British Columbia"]
+      universities: canadianUniversities.slice(0, 3).map(uni => ({
+        name: uni.name,
+        description: uni.description,
+        image: uni.images[0]
+      }))
     },
     {
       name: "Australia",
@@ -121,7 +142,11 @@ const StudyAbroad = () => {
         "Competitive job market",
         "Wildlife challenges"
       ],
-      universities: ["University of Melbourne", "University of Sydney", "Australian National University"]
+      universities: australianUniversities.slice(0, 3).map(uni => ({
+        name: uni.name,
+        description: uni.description,
+        image: uni.images[0]
+      }))
     },
     {
       name: "Germany",
@@ -150,13 +175,39 @@ const StudyAbroad = () => {
         "Limited English programs",
         "Housing shortage in major cities"
       ],
-      universities: ["Technical University of Munich", "Ludwig Maximilian University", "Heidelberg University"]
+      universities: germanUniversities.slice(0, 3).map(uni => ({
+        name: uni.name,
+        description: uni.description,
+        image: uni.images[0]
+      }))
     }
   ];
 
   return (
     <Layout>
       <div className="min-h-screen bg-slate-900 py-24">
+        {/* Top Logo Section */}
+        <div className="absolute top-32 right-10 w-48 h-48 opacity-20">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+          >
+            <AnimatedLogo />
+          </motion.div>
+        </div>
+
+        {/* Add Background Logo */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.02] scale-150">
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            >
+              <AnimatedLogo isBackground={true} />
+            </motion.div>
+          </div>
+        </div>
+
         <div className="container mx-auto px-4">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
@@ -254,11 +305,11 @@ const StudyAbroad = () => {
                         whileHover={{ scale: 1.05 }}
                         className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 
                           cursor-pointer hover:bg-white/10 transition-all duration-300"
-                        onClick={() => navigate(`/explore-universities?country=${country.name}&university=${uni}`)}
+                        onClick={() => navigate(`/explore-universities?country=${country.name}&university=${uni.name}`)}
                       >
                         <FaGraduationCap className="text-3xl text-indigo-400 mb-4" />
-                        <h4 className="text-xl font-bold text-white mb-2">{uni}</h4>
-                        <p className="text-slate-300">Click to explore details</p>
+                        <h4 className="text-xl font-bold text-white mb-2">{uni.name}</h4>
+                        <p className="text-slate-300 line-clamp-2">{uni.description}</p>
                       </motion.div>
                     ))}
                   </div>

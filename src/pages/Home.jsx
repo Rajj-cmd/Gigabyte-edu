@@ -1,42 +1,33 @@
-import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
-import AnimatedLogo from "../components/AnimatedLogo";
-import { FaLinkedin, FaMapMarkerAlt, FaArrowRight, FaArrowLeft, FaFacebook, FaEnvelope, FaClock, FaGlobe, FaUniversity, FaUsers } from "react-icons/fa";
+import { FaArrowRight, FaArrowLeft, FaUniversity, FaUsers, FaGraduationCap, FaGlobeAmericas, FaArrowUp, FaLinkedin, FaMapMarkerAlt } from "react-icons/fa";
+import { useRef, useState, useEffect, useMemo } from "react";
 import founderImage from "../assets/images/Founder.jpg"; 
 import ApplicationProcess from '../components/ApplicationProcess';
-import { useRef, useState, useEffect } from "react";
 import { universities as usaUniversities } from "../assets/data/usa";
 import { ukUniversities } from "../assets/data/uk";
 import { australianUniversities } from "../assets/data/australia";
 import { germanUniversities } from "../assets/data/germany";
 import { canadianUniversities } from "../assets/data/canada";
-import AnimatedBackground from '../components/AnimatedBackground';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
+import AnimatedLogo from '../components/AnimatedLogo';
+import PropTypes from 'prop-types';
 
 const Home = () => {
   const navigate = useNavigate();
   const { scrollY } = useScroll();
-  const backgroundY = useTransform(scrollY, [0, 500], ['0%', '20%']);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
   const overlayOpacity = useTransform(scrollY, [200, 500], [0, 1]);
-  const scrollContainerRef = useRef(null);
 
-  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
-  const heroScale = useTransform(scrollY, [0, 400], [1, 0.95]);
-  const heroY = useTransform(scrollY, [0, 400], [0, 100]);
+  // Define section refs
+  const heroRef = useRef(null);
+  const aboutRef = useRef(null);
+  const destinationsRef = useRef(null);
+  const universitiesRef = useRef(null);
+  const processRef = useRef(null);
 
-  const ref1 = useRef(null);
-  const ref2 = useRef(null);
-  const ref3 = useRef(null);
-  const isInView1 = useInView(ref1, { once: true, margin: "-100px" });
-  const isInView2 = useInView(ref2, { once: true, margin: "-100px" });
-  const isInView3 = useInView(ref3, { once: true, margin: "-100px" });
-
-  const [isButtonVisible, setIsButtonVisible] = useState(true);
   const [currentDestination, setCurrentDestination] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const timerRef = useRef(null);
 
   const featuredDestinations = [
     {
@@ -159,6 +150,89 @@ const Home = () => {
     }, 100);
   };
 
+  const onRegisterClick = () => {
+    navigate('/schedule-visit'); // Changed from /register to /schedule-visit
+  };
+
+  // Wrap sections in useMemo
+  const sections = useMemo(() => [
+    { name: "Home", ref: heroRef },
+    { name: "About", ref: aboutRef },
+    { name: "Destinations", ref: destinationsRef },
+    { name: "Universities", ref: universitiesRef },
+    { name: "Process", ref: processRef }
+  ], []);  // Empty dependency array since refs are stable
+
+  const [activeSection, setActiveSection] = useState("Home");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const pageTop = window.scrollY;
+      const offsets = sections.map(section => ({
+        name: section.name,
+        offset: section.ref.current?.offsetTop || 0
+      }));
+
+      for (let i = offsets.length - 1; i >= 0; i--) {
+        if (pageTop >= offsets[i].offset - 100) {
+          setActiveSection(offsets[i].name);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [sections]); // Include sections in deps
+
+  // Add scroll to top functionality
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Enhanced section navigation with hover labels
+  const renderSectionNav = () => (
+    <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50">
+      <div className="flex flex-col gap-4">
+        {sections.map((section) => (
+          <div key={section.name} className="group relative">
+            <motion.button
+              onClick={() => section.ref.current?.scrollIntoView({ behavior: 'smooth' })}
+              className={`w-3 h-3 rounded-full transition-all duration-300
+                ${activeSection === section.name 
+                  ? 'bg-indigo-500 scale-125' 
+                  : 'bg-white/50 hover:bg-white/75'}`}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <span className="sr-only">{section.name}</span>
+            </motion.button>
+            <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 pointer-events-none">
+              <motion.span
+                initial={{ opacity: 0, x: 20 }}
+                whileHover={{ opacity: 1, x: 0 }}
+                className="text-white text-sm whitespace-nowrap bg-black/50 px-2 py-1 rounded"
+              >
+                {section.name}
+              </motion.span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   // Render Featured Destinations
   const renderFeaturedDestinations = () => (
     <section className="relative min-h-screen bg-slate-900">
@@ -278,7 +352,7 @@ const Home = () => {
     
     return allUniversities
       .sort(() => 0.5 - Math.random())
-      .slice(0, 3);
+      .slice(0, 6); // Changed from 3 to 6
   };
 
   const [featuredUniversities] = useState(getFeaturedUniversities());
@@ -301,7 +375,7 @@ const Home = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {featuredUniversities.map((university, index) => (
             <motion.div
               key={university.name}
@@ -376,223 +450,256 @@ const Home = () => {
   );
 
   return (
-    <Layout>
+    <>
       <SEO 
-        title="Gigabyte Education Consultancy - Home" 
-        description="Gigabyte Education Consultancy provides expert guidance for students aspiring to study abroad. Explore top universities and get personalized support." 
-        keywords="education consultancy, study abroad, university applications, visa support, scholarships, consultancy in Nepal, apply abroad" 
-        author="Gigabyte Education Consultancy"
+        title="Home"
+        description="Start your international education journey with Gigabyte Education. Expert guidance for studying in USA, UK, Canada, Australia & Germany. Leading education consultancy in Nepal."
+        keywords="study abroad, international education, education consultancy Nepal, university admissions, study in USA, study in UK, study in Canada, study in Australia, study in Germany"
+        ogType="website"
       />
-      <div className="relative">
-        <AnimatedBackground />
-        {/* Remove NavigationIndicator */}
-        {/* <NavigationIndicator /> */}
+      <Layout>
+        {renderSectionNav()}
 
-        {/* Hero Section */}
-        <section id="hero" className="relative min-h-screen">
-          <div className="relative min-h-screen">
-            <motion.div 
-              className="absolute inset-0 z-0"
-              style={{ 
-                y: backgroundY,
-                backgroundImage: "url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
+        {/* Scroll to Top Button */}
+        <AnimatePresence>
+          {showScrollTop && (
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              onClick={scrollToTop}
+              className="fixed bottom-8 right-8 z-50 bg-indigo-600 text-white p-3 rounded-full 
+                shadow-lg hover:bg-indigo-500 transition-colors duration-300"
             >
+              <FaArrowUp />
+            </motion.button>
+          )}
+        </AnimatePresence>
+
+        <div className="relative">
+          {/* Update section refs */}
+          <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900">
+            {/* Background Image Overlay */}
+            <div className="absolute inset-0">
               <motion.div 
-                style={{ opacity }}
-                className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-800/95 to-indigo-900/90"
-              />
-            </motion.div>
+                initial={{ scale: 1.1 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                className="absolute inset-0"
+              >
+                <img 
+                  src="src/assets/images/Graduation.jpg" 
+                  alt="University Campus"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-900/90" />
+              </motion.div>
+            </div>
 
-            <div className="relative z-10 container mx-auto px-4 py-20">
-              <div className="grid md:grid-cols-2 gap-12 items-center min-h-[calc(100vh-6rem)]">
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8 }}
-                  className="text-white space-y-6"
-                >
-                  <div className="space-y-6">
-                      <motion.h1 
-                        className="text-5xl lg:text-7xl font-bold tracking-tight"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                      >
-                        <span className="text-white">Transform Your</span>
-                        <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
-                          Future Globally
-                        </span>
-                      </motion.h1>
+            {/* Content Container */}
+            <div className="relative container mx-auto px-4 py-32">
+              <div className="flex items-center justify-between max-w-7xl mx-auto">
+                {/* Text Content */}
+                <div className="flex-1 max-w-3xl">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="inline-block px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm 
+                      border border-white/20 text-sm font-medium text-indigo-300 mb-6"
+                  >
+                    Your Gateway to Global Education
+                  </motion.div>
 
-                      <motion.p
-                        className="text-xl text-slate-200 max-w-xl leading-relaxed font-medium"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                      >
-                        Expert guidance for your international education journey. Get personalized 
-                        support to study at top universities worldwide.
-                      </motion.p>
-                    </div>
+                  <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="text-6xl lg:text-8xl font-bold mb-6"
+                  >
+                    <span className="text-white block mb-2">Transform Your</span>
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r 
+                      from-indigo-400 via-purple-400 to-pink-400">
+                      Future Globally
+                    </span>
+                  </motion.h1>
 
-                    <motion.button
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.8 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className="text-xl text-slate-300 mb-8 max-w-xl"
+                  >
+                    Get expert guidance and support for your international education journey. 
+                    Join thousands of successful students studying at top universities worldwide.
+                  </motion.p>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 }}
+                    className="flex flex-col sm:flex-row items-center sm:items-start 
+                      space-y-4 sm:space-y-0 sm:space-x-4"
+                  >
+                    <button
                       onClick={() => navigate('/explore-universities')}
                       className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 
-                        rounded-xl text-lg font-semibold text-white
-                        shadow-[0_4px_20px_rgba(79,70,229,0.3)]
-                        hover:shadow-[0_6px_24px_rgba(79,70,229,0.4)]
-                        transition-all duration-300"
+                        rounded-xl text-lg font-semibold text-white w-full sm:w-auto
+                        hover:shadow-lg hover:shadow-indigo-500/25 transition-all duration-300
+                        transform hover:-translate-y-1"
                     >
                       Explore Universities
-                    </motion.button>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="flex justify-center"
-                >
-                  <AnimatedLogo className="w-64 h-64 mx-auto" />
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* About Section */}
-        <section id="about" className="relative min-h-screen">
-          <div className="relative min-h-screen">
-            <motion.div 
-              className="absolute inset-0 z-0"
-              style={{ 
-                backgroundImage: "url('https://images.unsplash.com/photo-1577412647305-991150c7d163?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              <motion.div 
-                style={{ opacity: overlayOpacity }}
-                className="absolute inset-0 bg-gradient-to-b from-slate-900/98 via-slate-900/95 to-slate-900/98"
-              />
-            </motion.div>
-
-            <div className="relative z-10 container mx-auto px-4 py-20">
-              <div className="grid md:grid-cols-2 gap-16 items-start">
-                <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                  className="backdrop-blur-sm bg-white/10 rounded-3xl p-8 shadow-2xl"
-                >
-                  <div className="flex flex-col items-center text-center mb-8">
-                    <div className="relative w-48 h-48 mb-6">
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-spin-slow" />
-                      <img
-                        src={founderImage}
-                        alt="Suman Pathak"
-                        className="rounded-full w-full h-full object-cover border-4 border-white relative z-10"
-                      />
-                    </div>
-                    <h2 className="text-3xl font-bold text-white mb-2">Suman Pathak</h2>
-                    <p className="text-indigo-300 font-semibold">Founder & Lead Consultant</p>
-                    <a 
-                      href="https://www.linkedin.com/in/suman-pathak-702165276/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-4 inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors"
+                    </button>
+                    <button
+                      onClick={onRegisterClick}
+                      className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 
+                        rounded-xl text-lg font-semibold text-white w-full sm:w-auto
+                        hover:bg-white/20 transition-all duration-300"
                     >
-                      <FaLinkedin size={24} className="mr-2" />
-                      Connect on LinkedIn
-                    </a>
-                  </div>
-                  <div className="text-slate-300 space-y-4">
-                    <p className="leading-relaxed">
-                    Suman Pathak is the Lead Consultant and Founder of Gigabyte Education Consultancy, bringing over 7 years of expertise in the education consultancy field. With a deep commitment to helping students achieve their academic goals, Suman has successfully guided numerous applicants toward securing places in their dream universities. His vast experience and personalized approach have made him a trusted advisor for students looking to study abroad, ensuring they receive the support and insights needed for a successful academic journey.
-                    </p>
-                    <ul className="space-y-2">
-                      <li className="flex items-center">
-                        <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
-                        Certified Education Consultant
-                      </li>
-                      <li className="flex items-center">
-                        <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
-                        Expert in International University Admissions
-                      </li>
-                      <li className="flex items-center">
-                        <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
-                        Specialized in Study Abroad Programs
-                      </li>
-                    </ul>
-                  </div>
-                </motion.div>
+                      Schedule a Visit →
+                    </button>
+                  </motion.div>
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="backdrop-blur-sm bg-white/10 rounded-3xl p-8 shadow-2xl"
-                >
-                  <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold text-white mb-4">
-                      About Gigabyte Education
-                    </h2>
-                    <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto" />
+                {/* Logo with Symbols */}
+                <div className="hidden md:flex flex-col items-center">
+                  <div className="w-[300px] h-[300px] mb-4">
+                    <AnimatedLogo className="w-full h-full" />
                   </div>
-                  <div className="text-slate-300 space-y-6">
-                    <p className="leading-relaxed">
-                    Gigabyte Education Consultancy is a leading education consultancy dedicated to providing expert guidance and support to students aspiring to study abroad. With years of experience and a deep understanding of the academic landscape, we help students navigate the complex processes of university applications, visa procedures, and scholarship opportunities. Our expert team is committed to ensuring that every student receives the personalized attention and support they deserve, making their dream of studying abroad a reality.
-                    </p>
-                    <div className="grid grid-cols-2 gap-6">
-                      <div className="text-center p-4 rounded-xl bg-white/5">
-                        <h3 className="text-xl font-semibold text-indigo-400 mb-2">Our Mission</h3>
-                        <p className="text-sm">
-                          To provide expert guidance and support for students
-                          pursuing international education opportunities.
-                        </p>
-                      </div>
-                      <div className="text-center p-4 rounded-xl bg-white/5">
-                        <h3 className="text-xl font-semibold text-indigo-400 mb-2">Our Vision</h3>
-                        <p className="text-sm">
-                          To become the most trusted name in educational
-                          consulting, known for excellence and student success.
-                        </p>
-                      </div>
-                    </div>
+                  {/* Symbols positioned below logo */}
+                  <div className="flex items-center justify-center space-x-4">
+                    <FaGraduationCap className="text-indigo-400 text-xl hover:text-indigo-300 transition-colors" />
+                    <FaGlobeAmericas className="text-purple-400 text-xl hover:text-purple-300 transition-colors" />
+                    <FaUniversity className="text-pink-400 text-xl hover:text-pink-300 transition-colors" />
+                    <FaUsers className="text-blue-400 text-xl hover:text-blue-300 transition-colors" />
                   </div>
-                </motion.div>
+                </div>
+
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Featured Study Destinations */}
-        <section id="destinations" className="relative min-h-screen">
-          {renderFeaturedDestinations()}
-        </section>
+          <section ref={aboutRef} id="about" className="relative min-h-screen">
+            <div className="relative min-h-screen">
+              <motion.div 
+                className="absolute inset-0 z-0"
+                style={{ 
+                  backgroundImage: "url('https://images.unsplash.com/photo-1577412647305-991150c7d163?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                <motion.div 
+                  style={{ opacity: overlayOpacity }}
+                  className="absolute inset-0 bg-gradient-to-b from-slate-900/98 via-slate-900/95 to-slate-900/98"
+                />
+              </motion.div>
 
-        {/* Featured Universities */}
-        <section id="universities" className="relative min-h-screen">
-          {renderFeaturedUniversities()}
-        </section>
+              <div className="relative z-10 container mx-auto px-4 py-20">
+                <div className="grid md:grid-cols-2 gap-16 items-start">
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    viewport={{ once: true }}
+                    className="backdrop-blur-sm bg-white/10 rounded-3xl p-8 shadow-2xl"
+                  >
+                    <div className="flex flex-col items-center text-center mb-8">
+                      <div className="relative w-48 h-48 mb-6">
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-spin-slow" />
+                        <img
+                          src={founderImage}
+                          alt="Suman Pathak"
+                          className="rounded-full w-full h-full object-cover border-4 border-white relative z-10"
+                        />
+                      </div>
+                      <h2 className="text-3xl font-bold text-white mb-2">Suman Pathak</h2>
+                      <p className="text-indigo-300 font-semibold">Founder & Lead Consultant</p>
+                      <a 
+                        href="https://www.linkedin.com/in/suman-pathak-702165276/" // Update this line with the new LinkedIn URL
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors"
+                      >
+                        <FaLinkedin size={24} className="mr-2" />
+                        Connect on LinkedIn
+                      </a>
+                    </div>
+                    <div className="text-slate-300 space-y-4">
+                      <p className="leading-relaxed">
+                      Suman Pathak is the Lead Consultant and Founder of Gigabyte Education Consultancy, bringing over 7 years of expertise in the education consultancy field. With a deep commitment to helping students achieve their academic goals, Suman has successfully guided numerous applicants toward securing places in their dream universities. His vast experience and personalized approach have made him a trusted advisor for students looking to study abroad, ensuring they receive the support and insights needed for a successful academic journey.
+                      </p>
+                      <ul className="space-y-2">
+                        <li className="flex items-center">
+                          <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
+                          Certified Education Consultant
+                        </li>
+                        <li className="flex items-center">
+                          <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
+                          Expert in International University Admissions
+                        </li>
+                        <li className="flex items-center">
+                          <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
+                          Specialized in Study Abroad Programs
+                        </li>
+                      </ul>
+                    </div>
+                  </motion.div>
 
-        {/* Application Process Section */}
-        <section id="process" className="relative min-h-screen">
-          <ApplicationProcess />
-        </section>
-      </div>
-    </Layout>
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    viewport={{ once: true }}
+                    className="backdrop-blur-sm bg-white/10 rounded-3xl p-8 shadow-2xl"
+                  >
+                    <div className="text-center mb-8">
+                      <h2 className="text-3xl font-bold text-white mb-4">
+                        About Gigabyte Education
+                      </h2>
+                      <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto" />
+                    </div>
+                    <div className="text-slate-300 space-y-6">
+                      <p className="leading-relaxed">
+                      Gigabyte Education Consultancy is a leading education consultancy dedicated to providing expert guidance and support to students aspiring to study abroad. With years of experience and a deep understanding of the academic landscape, we help students navigate the complex processes of university applications, visa procedures, and scholarship opportunities. Our expert team is committed to ensuring that every student receives the personalized attention and support they deserve, making their dream of studying abroad a reality.
+                      </p>
+                      <div className="grid grid-cols-2 gap-6">
+                        <div className="text-center p-4 rounded-xl bg-white/5">
+                          <h3 className="text-xl font-semibold text-indigo-400 mb-2">Our Mission</h3>
+                          <p className="text-sm">
+                            To provide expert guidance and support for students
+                            pursuing international education opportunities.
+                          </p>
+                        </div>
+                        <div className="text-center p-4 rounded-xl bg-white/5">
+                          <h3 className="text-xl font-semibold text-indigo-400 mb-2">Our Vision</h3>
+                          <p className="text-sm">
+                            To become the most trusted name in educational
+                            consulting, known for excellence and student success.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section ref={destinationsRef} id="destinations" className="relative min-h-screen">
+            {renderFeaturedDestinations()}
+          </section>
+
+          <section ref={universitiesRef} id="universities" className="relative min-h-screen">
+            {renderFeaturedUniversities()}
+          </section>
+
+          <section ref={processRef} id="process" className="relative pb-20">
+            <ApplicationProcess />
+          </section>
+        </div>
+      </Layout>
+    </>
   );
 };
 
