@@ -7,7 +7,7 @@ export const ukUniversities = [
     description: "A diverse and career-focused university in the heart of London, known for its strong emphasis on employability.",
     ranking: "801-1000 (QS)",
     type: "Public",
-    images: ["public/Images/UK/London Metropolitan University/campus.jpg"],
+    images: ["Images/UK/London Metropolitan University/campus.jpg"],
     programs: ["Business", "Art & Design", "Computing", "Social Sciences"],
     features: ["Central London Location", "Industry Links", "Modern Facilities", "Career Support"]
   },
@@ -19,7 +19,7 @@ export const ukUniversities = [
     description: "A progressive university with a practical focus, located in the heart of London.",
     ranking: "801-1000 (THE)",
     type: "Public",
-    images: ["public/Images/UK/London South Bank University/campus.jpg"],
+    images: ["Images/UK/London South Bank University/campus.jpg"],
     programs: ["Engineering", "Health Sciences", "Business", "Architecture"],
     features: ["Industry Partnerships", "Practical Learning", "Modern Campus", "Strong Employment Rates"]
   },
@@ -31,7 +31,7 @@ export const ukUniversities = [
     description: "Renowned for research-intensive programs and excellent sports facilities, with strong industry connections.",
     ranking: "351-400 (THE)",
     type: "Public",
-    images: ["public/Images/UK/Brunel University London/campus.jpg"],
+    images: ["Images/UK/Brunel University London/campus.jpg"],
     programs: ["Mechanical Engineering", "Design", "Business Management", "Sports Science"],
     features: ["Single-campus University", "Olympic-standard Sports Facilities", "Industry Placement Year", "Research Excellence"]
   },
@@ -43,7 +43,7 @@ export const ukUniversities = [
     description: "Internationally diverse university with prime central London locations and media/communications strengths.",
     ranking: "601-800 (QS)",
     type: "Public",
-    images: ["public/Images/UK/University of Westminster/campus.jpg"],
+    images: ["Images/UK/University of Westminster/campus.jpg"],
     programs: ["Media & Communications", "Architecture", "Fashion", "Politics"],
     features: ["Central London Campuses", "Media Industry Partnerships", "Diverse Student Body", "Creative Industries Focus"]
   },
@@ -55,7 +55,7 @@ export const ukUniversities = [
     description: "Modern university with strong vocational focus and excellent student support services.",
     ranking: "1001-1200 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Wolverhampton/campus.jpg"],
+    images: ["Images/UK/University of Wolverhampton/campus.jpg"],
     programs: ["Nursing", "Education", "Engineering", "Cyber Security"],
     features: ["Affordable Living Costs", "Strong Graduate Employment", "Modern Facilities", "Industry-focused Curriculum"]
   },
@@ -67,7 +67,7 @@ export const ukUniversities = [
     description: "Career-oriented university with modern campuses in Stratford and Docklands.",
     ranking: "801-1000 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of East London/campus.jpg"],
+    images: ["Images/UK/University of East London/campus.jpg"],
     programs: ["Psychology", "Sports Science", "Civil Engineering", "Data Science"],
     features: ["London Location", "Employability Focus", "Modern Accommodation", "Diverse Community"]
   },
@@ -79,7 +79,7 @@ export const ukUniversities = [
     description: "Global university with strong international links and innovative teaching approaches.",
     ranking: "601-800 (THE)",
     type: "Public",
-    images: ["public/Images/UK/Middlesex University London/campus.jpg"],
+    images: ["Images/UK/Middlesex University London/campus.jpg"],
     programs: ["Computer Science", "Business", "Nursing", "Design"],
     features: ["Global Network", "Work Placement Opportunities", "Modern Campus", "Entrepreneurship Support"]
   },
@@ -91,7 +91,7 @@ export const ukUniversities = [
     description: "Historic university with iconic campuses and strong maritime heritage.",
     ranking: "601-800 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Greenwich/campus.jpg"],
+    images: ["Images/UK/University of Greenwich/campus.jpg"],
     programs: ["Maritime Studies", "Architecture", "Business", "Environmental Science"],
     features: ["UNESCO World Heritage Site Campus", "Strong Industry Links", "Historic Setting", "Research-led Teaching"]
   },
@@ -103,7 +103,7 @@ export const ukUniversities = [
     description: "Creative university with excellent art and design programs, located in a riverside setting.",
     ranking: "601-800 (THE)",
     type: "Public",
-    images: ["public/Images/UK/Kingston University London/campus.jpg"],
+    images: ["Images/UK/Kingston University London/campus.jpg"],
     programs: ["Fashion Design", "Aerospace Engineering", "Pharmacy", "Journalism"],
     features: ["Creative Hub", "Industry-standard Facilities", "Strong Graduate Outcomes", "Riverside Campus"]
   },
@@ -115,7 +115,7 @@ export const ukUniversities = [
     description: "Modern university with strong emphasis on employability and industry-relevant courses.",
     ranking: "601-650 (QS)",
     type: "Public",
-    images: ["public/Images/UK/Coventry University/campus.jpg"],
+    images: ["Images/UK/Coventry University/campus.jpg"],
     programs: ["Automotive Engineering", "Healthcare Management", "Digital Media", "International Business"],
     features: ["Modern Campus", "Industry Partnerships", "Employability Focus", "Student Enterprise Support"]
   },
@@ -127,7 +127,7 @@ export const ukUniversities = [
     description: "Innovative university with strong STEM programs and excellent industry connections.",
     ranking: "801-1000 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Hertfordshire/campus.jpg"],
+    images: ["Images/UK/University of Hertfordshire/campus.jpg"],
     programs: ["Aerospace Engineering", "Computer Science", "Pharmacy", "Film Production"],
     features: ["STEM Focus", "Industry Placements", "Modern Facilities", "Entrepreneurship Programs"]
   },
@@ -139,7 +139,7 @@ export const ukUniversities = [
     description: "Modern university with strong health and computer science programs, offering excellent student support.",
     ranking: "1001-1200 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Bedfordshire/campus.jpg"],
+    images: ["Images/UK/University of Bedfordshire/campus.jpg"],
     programs: ["Nursing", "Computer Science", "Psychology", "Business"],
     features: ["Affordable Fees", "Modern Facilities", "Industry Placements", "Student Support Services"]
   },
@@ -151,7 +151,7 @@ export const ukUniversities = [
     description: "Campus university in London known for its strong humanities and life sciences programs.",
     ranking: "801-1000 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Roehampton/campus.jpg"],
+    images: ["Images/UK/University of Roehampton/campus.jpg"],
     programs: ["Dance", "Biological Sciences", "Business", "Education"],
     features: ["Green Campus", "Teaching Excellence", "Research-led Curriculum", "London Location"]
   },
@@ -163,7 +163,7 @@ export const ukUniversities = [
     description: "Career-focused university particularly strong in music and hospitality management.",
     ranking: "801-1000 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of West London/campus.jpg"],
+    images: ["Images/UK/University of West London/campus.jpg"],
     programs: ["Music Production", "Hospitality Management", "Law", "Nursing"],
     features: ["Industry Connections", "Modern Facilities", "London Location", "Employment-focused"]
   },
@@ -175,7 +175,7 @@ export const ukUniversities = [
     description: "Innovative university with strong emphasis on social enterprise and environmental sustainability.",
     ranking: "1001-1200 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Northampton/campus.jpg"],
+    images: ["Images/UK/University of Northampton/campus.jpg"],
     programs: ["Environmental Science", "Leather Technology", "Education", "Business"],
     features: ["New Waterside Campus", "Sustainability Focus", "Enterprise Culture", "Student Support"]
   },
@@ -187,7 +187,7 @@ export const ukUniversities = [
     description: "Coastal university with strong maritime and engineering programs.",
     ranking: "501-600 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Portsmouth/campus.jpg"],
+    images: ["Images/UK/University of Portsmouth/campus.jpg"],
     programs: ["Maritime Studies", "Criminal Justice", "Engineering", "Creative Technologies"],
     features: ["Coastal Location", "Industry Partnerships", "Modern Facilities", "Research Excellence"]
   },
@@ -199,7 +199,7 @@ export const ukUniversities = [
     description: "Career-focused university with strong media and health sciences programs.",
     ranking: "1001-1200 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Sunderland/campus.jpg"],
+    images: ["Images/UK/University of Sunderland/campus.jpg"],
     programs: ["Media Production", "Pharmacy", "Nursing", "Engineering"],
     features: ["Affordable Living", "Industry-standard Facilities", "Work Placements", "Student Support"]
   },
@@ -211,7 +211,7 @@ export const ukUniversities = [
     description: "Compact university offering vocational programs with strong industry links.",
     ranking: "1201-1500 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Bolton/campus.jpg"],
+    images: ["Images/UK/University of Bolton/campus.jpg"],
     programs: ["Education", "Health Sciences", "Engineering", "Creative Writing"],
     features: ["Small Class Sizes", "Industry-focused", "Affordable Fees", "Personalized Support"]
   },
@@ -223,7 +223,7 @@ export const ukUniversities = [
     description: "Large university with strong forensic science and aerospace programs.",
     ranking: "801-1000 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Central Lancashire (UCLan)/campus.jpg"],
+    images: ["Images/UK/University of Central Lancashire (UCLan)/campus.jpg"],
     programs: ["Forensic Science", "Aerospace Engineering", "Dentistry", "Journalism"],
     features: ["Industry Placements", "Modern Facilities", "Research-led Teaching", "Student Enterprise"]
   },
@@ -235,7 +235,7 @@ export const ukUniversities = [
     description: "Innovative university with strong engineering and creative arts programs.",
     ranking: "1001-1200 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Derby/campus.jpg"],
+    images: ["Images/UK/University of Derby/campus.jpg"],
     programs: ["Mechanical Engineering", "Fashion Design", "Criminology", "Business"],
     features: ["Industry-standard Facilities", "Employability Focus", "Modern Campus", "Student Support"]
   },
@@ -247,7 +247,7 @@ export const ukUniversities = [
     description: "University known for music and engineering programs with excellent graduate outcomes.",
     ranking: "601-800 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Huddersfield/campus.jpg"],
+    images: ["Images/UK/University of Huddersfield/campus.jpg"],
     programs: ["Music Technology", "Mechanical Engineering", "Pharmacy", "Education"],
     features: ["Teaching Excellence", "Industry Links", "Modern Facilities", "Student Satisfaction"]
   },
@@ -259,7 +259,7 @@ export const ukUniversities = [
     description: "Industry-connected university near Manchester with strong media and construction programs.",
     ranking: "801-1000 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Salford/campus.jpg"],
+    images: ["Images/UK/University of Salford/campus.jpg"],
     programs: ["Media Technology", "Construction Management", "Nursing", "Aeronautics"],
     features: ["Industry Partnerships", "Modern Campus", "Manchester Location", "Practical Learning"]
   },
@@ -271,7 +271,7 @@ export const ukUniversities = [
     description: "Coastal university with strengths in arts and health sciences.",
     ranking: "801-1000 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Brighton/campus.jpg"],
+    images: ["Images/UK/University of Brighton/campus.jpg"],
     programs: ["Pharmacy", "Architecture", "Digital Media", "Education"],
     features: ["Seaside Location", "Creative Community", "Industry Placements", "Research-informed Teaching"]
   },
@@ -283,7 +283,7 @@ export const ukUniversities = [
     description: "Modern university with strong agriculture and journalism programs.",
     ranking: "601-800 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Lincoln/campus.jpg"],
+    images: ["Images/UK/University of Lincoln/campus.jpg"],
     programs: ["Agriculture", "Journalism", "Computer Science", "Business"],
     features: ["Modern Campus", "Industry-focused", "Student Satisfaction", "Research Excellence"]
   },
@@ -295,7 +295,7 @@ export const ukUniversities = [
     description: "University with beautiful campuses and strengths in environmental and sports sciences.",
     ranking: "1001-1200 (THE)",
     type: "Public",
-    images: ["public/Images/UK/University of Gloucestershire/campus.jpg"],
+    images: ["Images/UK/University of Gloucestershire/campus.jpg"],
     programs: ["Environmental Science", "Sports Coaching", "Cyber Security", "Film Production"],
     features: ["Beautiful Campus", "Sustainability Focus", "Industry Connections", "Student Support"]
   },
@@ -303,7 +303,7 @@ export const ukUniversities = [
   ...uni,
   tuition: uni.tuition || 17000, // Set default tuition
   livingCost: Math.min(uni.livingCost || 15000, 20000),
-  images: uni.images || ["https://example.com/default-uk-campus.jpg"],
+  images: uni.images || ["https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80"],
   type: uni.type || "Public",
   features: uni.features || ["International Focus", "Quality Education", "Student Support", "Research Excellence"]
 }));

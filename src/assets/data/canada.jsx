@@ -7,7 +7,7 @@ export const canadianUniversities = [
     description: "A comprehensive university known for energy and environmental research programs.",
     ranking: "601-650",
     type: "Public",
-    images: ["public/Images/Canada/University of Regina/campus.jpg"],
+    images: ["Images/Canada/University of Regina/campus.jpg"],
     programs: ["Energy Studies", "Environmental Science", "Business", "Engineering"],
     features: ["Research Excellence", "Affordable Living", "Modern Facilities", "Industry Partners"]
   },
@@ -19,7 +19,7 @@ export const canadianUniversities = [
     description: "Known for wine and culinary programs with on-campus teaching facilities.",
     ranking: "Top 50 Canadian Colleges",
     type: "Public",
-    images: ["public/Images/Canada/Niagara College/campus.jpg"],
+    images: ["Images/Canada/Niagara College/campus.jpg"],
     programs: ["Wine Studies", "Culinary Arts", "Hospitality", "Business"],
     features: ["Teaching Winery", "Teaching Brewery", "Industry Partners", "Practical Learning"]
   },
@@ -31,7 +31,7 @@ export const canadianUniversities = [
     description: "Top polytechnic for engineering and technology with a high graduate employment rate.",
     ranking: "#1 Canadian Polytechnic",
     type: "Public",
-    images: ["public/Images/Canada/British Columbia Institute of Technology (BCIT) - Burnaby/campus.jpg"],
+    images: ["Images/Canada/British Columbia Institute of Technology (BCIT) - Burnaby/campus.jpg"],
     programs: ["Engineering", "Technology", "Business", "Health Sciences"],
     features: ["High Employment Rate", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
@@ -43,7 +43,7 @@ export const canadianUniversities = [
     description: "Focus on healthcare and IT diplomas with small class sizes and hands-on training.",
     ranking: "Niche Vocational College",
     type: "Private",
-    images: ["public/Images/Canada/IBT College - Toronto/campus.jpg"],
+    images: ["Images/Canada/IBT College - Toronto/campus.jpg"],
     programs: ["Healthcare", "Information Technology", "Business", "Hospitality"],
     features: ["Small Class Sizes", "Hands-on Training", "Industry Partners", "Modern Facilities"]
   },
@@ -55,7 +55,7 @@ export const canadianUniversities = [
     description: "Strong agriculture and aviation programs with affordable living costs.",
     ranking: "#1,300+ Globally",
     type: "Public",
-    images: ["public/Images/Canada/University of the Fraser Valley (UFV) - Abbotsford/campus.jpg"],
+    images: ["Images/Canada/University of the Fraser Valley (UFV) - Abbotsford/campus.jpg"],
     programs: ["Agriculture", "Aviation", "Business", "Health Sciences"],
     features: ["Affordable Living", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
@@ -67,7 +67,7 @@ export const canadianUniversities = [
     description: "Focus on social justice and Indigenous studies with a satellite campus near Toronto.",
     ranking: "#120+ in Canada",
     type: "Public",
-    images: ["public/Images/Canada/Algoma University - Brampton/campus.jpg"],
+    images: ["Images/Canada/Algoma University - Brampton/campus.jpg"],
     programs: ["Social Justice", "Indigenous Studies", "Business", "Health Sciences"],
     features: ["Satellite Campus", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
@@ -79,7 +79,7 @@ export const canadianUniversities = [
     description: "Leading research in agriculture and vaccines with the Canadian Light Source synchrotron.",
     ranking: "#473 Globally",
     type: "Public",
-    images: ["public/Images/Canada/University of Saskatchewan (USASK) - Saskatoon/campus.jpg"],
+    images: ["Images/Canada/University of Saskatchewan (USASK) - Saskatoon/campus.jpg"],
     programs: ["Agriculture", "Health Sciences", "Engineering", "Business"],
     features: ["Research Excellence", "Industry Partners", "Modern Facilities", "High Employment Rate"]
   },
@@ -91,7 +91,7 @@ export const canadianUniversities = [
     description: "Specializes in counseling and design degrees with flexible online and on-campus options.",
     ranking: "Niche Private University",
     type: "Private",
-    images: ["public/Images/Canada/Yorkville University - Vancouver/campus.jpg"],
+    images: ["Images/Canada/Yorkville University - Vancouver/campus.jpg"],
     programs: ["Counseling", "Design", "Business", "Health Sciences"],
     features: ["Flexible Options", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
@@ -103,7 +103,7 @@ export const canadianUniversities = [
     description: "Canada's largest college with top programs in aviation and animation.",
     ranking: "Top 10 Canadian Colleges",
     type: "Public",
-    images: ["public/Images/Canada/Seneca College - Toronto/campus.jpg"],
+    images: ["Images/Canada/Seneca College - Toronto/campus.jpg"],
     programs: ["Aviation", "Animation", "Business", "Health Sciences"],
     features: ["Large Student Body", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
@@ -115,7 +115,7 @@ export const canadianUniversities = [
     description: "Known for adventure tourism and nursing with a focus on open learning and distance education.",
     ranking: "#1,200+ Globally",
     type: "Public",
-    images: ["public/Images/Canada/Thompson Rivers University - Kamloops/campus.jpg"],
+    images: ["Images/Canada/Thompson Rivers University - Kamloops/campus.jpg"],
     programs: ["Adventure Tourism", "Nursing", "Business", "Health Sciences"],
     features: ["Open Learning", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
@@ -127,7 +127,7 @@ export const canadianUniversities = [
     description: "Leading polytechnic for applied technology with partnerships with Shell Canada and PCL Construction.",
     ranking: "Top 5 Canadian Polytechnics",
     type: "Public",
-    images: ["public/Images/Canada/Northern Alberta Institute of Technology (NAIT) - Edmonton/campus.jpg"],
+    images: ["Images/Canada/Northern Alberta Institute of Technology (NAIT) - Edmonton/campus.jpg"],
     programs: ["Applied Technology", "Engineering", "Business", "Health Sciences"],
     features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
   },
@@ -139,7 +139,7 @@ export const canadianUniversities = [
     description: "Strong environmental science programs with a top ranking as an undergraduate university in Ontario.",
     ranking: "#1,000+ Globally",
     type: "Public",
-    images: ["public/Images/Canada/Trent University - Peterborough/campus.jpg"],
+    images: ["Images/Canada/Trent University - Peterborough/campus.jpg"],
     programs: ["Environmental Science", "Business", "Health Sciences", "Social Sciences"],
     features: ["Research Excellence", "Industry Partners", "Modern Facilities", "High Employment Rate"]
   },
@@ -151,7 +151,7 @@ export const canadianUniversities = [
     description: "Largest applied learning institution in Manitoba with strong aerospace and robotics programs.",
     ranking: "Top 15 Canadian Colleges",
     type: "Public",
-    images: ["public/Images/Canada/Red River College Polytechnic - Winnipeg/campus.jpg"],
+    images: ["Images/Canada/Red River College Polytechnic - Winnipeg/campus.jpg"],
     programs: ["Aerospace", "Robotics", "Business", "Health Sciences"],
     features: ["Applied Learning", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
@@ -163,7 +163,7 @@ export const canadianUniversities = [
     description: "Top undergraduate university in Canada with 56 Rhodes Scholars among alumni.",
     ranking: "#4 Undergraduate Universities",
     type: "Public",
-    images: ["public/Images/Canada/Mount Allison University - Sackville/campus.jpg"],
+    images: ["Images/Canada/Mount Allison University - Sackville/campus.jpg"],
     programs: ["Liberal Arts", "Business", "Health Sciences", "Social Sciences"],
     features: ["Research Excellence", "Industry Partners", "Modern Facilities", "High Employment Rate"]
   },
@@ -175,7 +175,7 @@ export const canadianUniversities = [
     description: "Notable for business and liberal arts with the Coady International Institute.",
     ranking: "#5 Undergraduate Universities",
     type: "Public",
-    images: ["public/Images/Canada/St. Francis Xavier University - Antigonish/campus.jpg"],
+    images: ["Images/Canada/St. Francis Xavier University - Antigonish/campus.jpg"],
     programs: ["Business", "Liberal Arts", "Health Sciences", "Social Sciences"],
     features: ["Research Excellence", "Industry Partners", "Modern Facilities", "High Employment Rate"]
   },
@@ -187,7 +187,7 @@ export const canadianUniversities = [
     description: "Top programs in petroleum engineering with partnerships with CP Rail and Telus.",
     ranking: "Top 3 Polytechnics in Canada",
     type: "Public",
-    images: ["public/Images/Canada/SAIT Polytechnic - Calgary/campus.jpg"],
+    images: ["Images/Canada/SAIT Polytechnic - Calgary/campus.jpg"],
     programs: ["Petroleum Engineering", "Applied Technology", "Business", "Health Sciences"],
     features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
   },
@@ -199,7 +199,7 @@ export const canadianUniversities = [
     description: "Canada’s largest film and acting school with strong media and hospitality programs.",
     ranking: "Top 10 Canadian Colleges",
     type: "Public",
-    images: ["public/Images/Canada/Humber College - Toronto/campus.jpg"],
+    images: ["Images/Canada/Humber College - Toronto/campus.jpg"],
     programs: ["Film", "Acting", "Media", "Hospitality"],
     features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
   },
@@ -211,7 +211,7 @@ export const canadianUniversities = [
     description: "Focus on marine biology and Indigenous education with an affordable coastal campus.",
     ranking: "#1,400+ Globally",
     type: "Public",
-    images: ["public/Images/Canada/Vancouver Island University - Nanaimo/campus.jpg"],
+    images: ["Images/Canada/Vancouver Island University - Nanaimo/campus.jpg"],
     programs: ["Marine Biology", "Indigenous Education", "Business", "Health Sciences"],
     features: ["Affordable Living", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
@@ -223,7 +223,7 @@ export const canadianUniversities = [
     description: "Leading aviation and forestry programs with an Indigenous-focused curriculum.",
     ranking: "Top 20 Canadian Colleges",
     type: "Public",
-    images: ["public/Images/Canada/Confederation College - Thunder Bay/campus.jpg"],
+    images: ["Images/Canada/Confederation College - Thunder Bay/campus.jpg"],
     programs: ["Aviation", "Forestry", "Business", "Health Sciences"],
     features: ["Indigenous Curriculum", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
@@ -235,7 +235,7 @@ export const canadianUniversities = [
     description: "PEI’s primary vocational college famous for culinary and maritime training.",
     ranking: "Top 25 Canadian Colleges",
     type: "Public",
-    images: ["public/Images/Canada/Holland College - Charlottetown/campus.jpg"],
+    images: ["Images/Canada/Holland College - Charlottetown/campus.jpg"],
     programs: ["Culinary Arts", "Maritime Training", "Business", "Health Sciences"],
     features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
   },
@@ -247,7 +247,7 @@ export const canadianUniversities = [
     description: "public/Images/Canada/Laurentian University - Sudbury/campus.jpg",
     ranking: "#1,200+ Globally",
     type: "Public",
-    images: ["src/assets/images/Canada/Laurentian University - Sudbury/campus.jpg"],
+    images: ["images/Canada/Laurentian University - Sudbury/campus.jpg"],
     programs: ["Mining Engineering", "Astronomy", "Business", "Health Sciences"],
     features: ["Bilingual Programs", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
@@ -259,7 +259,7 @@ export const canadianUniversities = [
     description: "Canada’s only polytechnic university with strong fashion design and brewing programs.",
     ranking: "#1,500+ Globally",
     type: "Public",
-    images: ["public/Images/Canada/Kwantlen Polytechnic University (KPU) - Surrey/campus.jpg"],
+    images: ["Images/Canada/Kwantlen Polytechnic University (KPU) - Surrey/campus.jpg"],
     programs: ["Fashion Design", "Brewing", "Business", "Health Sciences"],
     features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
   },
@@ -271,7 +271,7 @@ export const canadianUniversities = [
     description: "Canada’s top art and design university with notable alumni including Ken Danby and Barbara Astman.",
     ranking: "#1 in Art/Design in Canada",
     type: "Public",
-    images: ["public/Images/Canada/OCAD University - Toronto/campus.jpg"],
+    images: ["Images/Canada/OCAD University - Toronto/campus.jpg"],
     programs: ["Art", "Design", "Media", "Business"],
     features: ["Notable Alumni", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
@@ -283,7 +283,7 @@ export const canadianUniversities = [
     description: "Renowned for forestry and environmental studies with small class sizes in a northern setting.",
     ranking: "#1,400+ Globally",
     type: "Public",
-    images: ["public/Images/Canada/University of Northern British Columbia (UNBC) - Prince George/campus.jpg"],
+    images: ["Images/Canada/University of Northern British Columbia (UNBC) - Prince George/campus.jpg"],
     programs: ["Forestry", "Environmental Studies", "Business", "Health Sciences"],
     features: ["Small Class Sizes", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
@@ -295,7 +295,7 @@ export const canadianUniversities = [
     description: "Leading agriculture and wind turbine programs with the first Canadian college to offer a degree.",
     ranking: "Top 30 Canadian Colleges",
     type: "Public",
-    images: ["public/Images/Canada/Lethbridge College - Lethbridge/campus.jpg"],
+    images: ["Images/Canada/Lethbridge College - Lethbridge/campus.jpg"],
     programs: ["Agriculture", "Wind Turbine Technology", "Business", "Health Sciences"],
     features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
   }
