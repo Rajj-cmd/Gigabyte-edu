@@ -240,18 +240,6 @@ export const canadianUniversities = [
     features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
   },
   {
-    name: "Laurentian University - Sudbury",
-    location: "Sudbury, Ontario, Canada",
-    tuition: 27000,
-    livingCost: 12000,
-    description: "public/Images/Canada/Laurentian University - Sudbury/campus.jpg",
-    ranking: "#1,200+ Globally",
-    type: "Public",
-    images: ["images/Canada/Laurentian University - Sudbury/campus.jpg"],
-    programs: ["Mining Engineering", "Astronomy", "Business", "Health Sciences"],
-    features: ["Bilingual Programs", "Industry Partners", "Modern Facilities", "Research Excellence"]
-  },
-  {
     name: "Kwantlen Polytechnic University (KPU) - Surrey",
     location: "Surrey, British Columbia, Canada",
     tuition: 21500,
