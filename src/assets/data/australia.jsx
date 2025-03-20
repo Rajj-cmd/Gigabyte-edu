@@ -7,7 +7,7 @@ export const australianUniversities = [
     "description": "One of Australia's leading universities known for research excellence and teaching quality.",
     "ranking": "33",
     "type": "Public",
-    "images": ["src/assets/images/Australia/University of Melbourne/campus.jpg"],
+    "images": ["public/Images/Australia/University of Melbourne/campus.jpg"],
     "programs": ["Arts", "Science", "Engineering", "Medicine"],
     "features": ["Research Excellence", "Cultural Diversity", "City Campus", "Global Recognition"]
   },
@@ -19,7 +19,7 @@ export const australianUniversities = [
     "description": "Australia’s national research university.",
     "ranking": "34",
     "type": "Public",
-    "images": ["src/assets/images/Australia/Australian National University (ANU)/campus.jpg"],
+    "images": ["public/Images/Australia/Australian National University (ANU)/campus.jpg"],
     "programs": ["Policy Studies", "Astronomy", "Indigenous Culture"],
     "features": ["Strong in policy studies", "Located in the capital city", "Close to government institutions"]
   },
@@ -31,7 +31,7 @@ export const australianUniversities = [
     "description": "Oldest university in Australia (founded 1850).",
     "ranking": "19",
     "type": "Public",
-    "images": ["src/assets/images/Australia/University of Sydney/campus.jpg"],
+    "images": ["public/Images/Australia/University of Sydney/campus.jpg"],
     "programs": ["Arts", "Science", "Engineering", "Medicine"],
     "features": ["Ranked #1 globally for graduate employability", "Iconic campus with heritage-listed buildings"]
   },
@@ -43,7 +43,7 @@ export const australianUniversities = [
     "description": "Pioneering research in HPV vaccine and quantum computing.",
     "ranking": "43",
     "type": "Public",
-    "images": ["src/assets/images/Australia/University of Queensland (UQ)/campus.jpg"],
+    "images": ["public/Images/Australia/University of Queensland (UQ)/campus.jpg"],
     "programs": ["Arts", "Science", "Engineering", "Medicine"],
     "features": ["Stunning campus with lakes and wildlife", "Member of the Go8 and Universitas 21"]
   },
@@ -55,7 +55,7 @@ export const australianUniversities = [
     "description": "Largest university in Australia by student population.",
     "ranking": "42",
     "type": "Public",
-    "images": ["src/assets/images/Australia/Monash University/campus.jpg"],
+    "images": ["public/Images/Australia/Monash University/campus.jpg"],
     "programs": ["Pharmacy", "Pharmacology", "Arts", "Science"],
     "features": ["Global campuses in Malaysia, Indonesia, and Italy"]
   },
@@ -67,7 +67,7 @@ export const australianUniversities = [
     "description": "Top-ranked for engineering and solar technology.",
     "ranking": "19",
     "type": "Public",
-    "images": ["src/assets/images/Australia/University of New South Wales (UNSW)/campus.jpg"],
+    "images": ["public/Images/Australia/University of New South Wales (UNSW)/campus.jpg"],
     "programs": ["Engineering", "Business", "Arts", "Science"],
     "features": ["Home to Australia’s top MBA program", "Strong industry ties with Boeing and CSIRO"]
   },
@@ -79,7 +79,7 @@ export const australianUniversities = [
     "description": "Ranked #1 young university in Australia.",
     "ranking": "90",
     "type": "Public",
-    "images": ["src/assets/images/Australia/University of Technology Sydney (UTS)/campus.jpg"],
+    "images": ["public/Images/Australia/University of Technology Sydney (UTS)/campus.jpg"],
     "programs": ["Innovation", "Entrepreneurship", "Business", "Science"],
     "features": ["Iconic Frank Gehry-designed Business School building"]
   },
@@ -91,7 +91,7 @@ export const australianUniversities = [
     "description": "Member of the Go8 and a sandstone university.",
     "ranking": "89",
     "type": "Public",
-    "images": ["src/assets/images/Australia/University of Adelaide/campus.jpg"],
+    "images": ["public/Images/Australia/University of Adelaide/campus.jpg"],
     "programs": ["Wine Science", "Defence Research", "Arts", "Science"],
     "features": ["Five Nobel laureates affiliated"]
   },
@@ -103,7 +103,7 @@ export const australianUniversities = [
     "description": "Known for robotics, data science, and creative industries.",
     "ranking": "189",
     "type": "Public",
-    "images": ["src/assets/images/Australia/Queensland University of Technology (QUT)/campus.jpg"],
+    "images": ["public/Images/Australia/Queensland University of Technology (QUT)/campus.jpg"],
     "programs": ["Robotics", "Data Science", "Creative Industries", "Arts"],
     "features": ["Partners with NASA on Mars mission projects"]
   },
@@ -115,7 +115,7 @@ export const australianUniversities = [
     "description": "Global leader in art & design.",
     "ranking": "140",
     "type": "Public",
-    "images": ["src/assets/images/Australia/RMIT University/campus.jpg"],
+    "images": ["public/Images/Australia/RMIT University/campus.jpg"],
     "programs": ["Art & Design", "Business", "Science", "Engineering"],
     "features": ["Industry-focused programs with companies like Deloitte"]
   },
@@ -127,7 +127,7 @@ export const australianUniversities = [
     "description": "Top 1% globally for graduate employability.",
     "ranking": "162",
     "type": "Public",
-    "images": ["src/assets/images/Australia/University of Wollongong/campus.jpg"],
+    "images": ["public/Images/Australia/University of Wollongong/campus.jpg"],
     "programs": ["Steel Manufacturing", "AI", "Arts", "Science"],
     "features": ["Coastal campus with proximity to Sydney"]
   },
@@ -139,7 +139,7 @@ export const australianUniversities = [
     "description": "Australia’s first university to offer a cloud campus.",
     "ranking": "233",
     "type": "Public",
-    "images": ["src/assets/images/Australia/Deakin University/campus.jpg"],
+    "images": ["public/Images/Australia/Deakin University/campus.jpg"],
     "programs": ["Sport Science", "Arts", "Science", "Engineering"],
     "features": ["Partners with CSIRO and Ford Australia"]
   },
@@ -151,7 +151,7 @@ export const australianUniversities = [
     "description": "Largest university in Western Australia.",
     "ranking": "183",
     "type": "Public",
-    "images": ["src/assets/images/Australia/Curtin University/campus.jpg"],
+    "images": ["public/Images/Australia/Curtin University/campus.jpg"],
     "programs": ["Mining Engineering", "Arts", "Science", "Engineering"],
     "features": ["Partners with NASA for space research"]
   },
@@ -163,7 +163,7 @@ export const australianUniversities = [
     "description": "Top-ranked for hospitality and tourism.",
     "ranking": "243",
     "type": "Public",
-    "images": ["src/assets/images/Australia/Griffith University/campus.jpg"],
+    "images": ["public/Images/Australia/Griffith University/campus.jpg"],
     "programs": ["Hospitality", "Tourism", "Arts", "Science"],
     "features": ["Home to the Griffith Climate Action Beacon"]
   },
@@ -175,7 +175,7 @@ export const australianUniversities = [
     "description": "Home to the Australian Hearing Hub and innovation district.",
     "ranking": "130",
     "type": "Public",
-    "images": ["src/assets/images/Australia/Macquarie University/campus.jpg"],
+    "images": ["public/Images/Australia/Macquarie University/campus.jpg"],
     "programs": ["Arts", "Science", "Engineering", "Medicine"],
     "features": ["First university to align degrees with UN SDGs"]
   },
@@ -187,7 +187,7 @@ export const australianUniversities = [
     "description": "Top 5 globally for quality education.",
     "ranking": "326",
     "type": "Public",
-    "images": ["src/assets/images/Australia/University of South Australia (UniSA)/campus.jpg"],
+    "images": ["public/Images/Australia/University of South Australia (UniSA)/campus.jpg"],
     "programs": ["Arts", "Science", "Engineering", "Medicine"],
     "features": ["Strong industry partnerships with SA Health and BHP"]
   },
@@ -199,7 +199,7 @@ export const australianUniversities = [
     "description": "Ranked #1 globally for social, economic, and environmental impact.",
     "ranking": "375",
     "type": "Public",
-    "images": ["src/assets/images/Australia/Western Sydney University/campus.jpg"],
+    "images": ["public/Images/Australia/Western Sydney University/campus.jpg"],
     "programs": ["Arts", "Science", "Engineering", "Medicine"],
     "features": ["Home to the National Vegetable Protected Cropping Centre"]
   },
@@ -211,7 +211,7 @@ export const australianUniversities = [
     "description": "Top 1% globally for arts, humanities, and life sciences.",
     "ranking": "242",
     "type": "Public",
-    "images": ["src/assets/images/Australia/La Trobe University/campus.jpg"],
+    "images": ["public/Images/Australia/La Trobe University/campus.jpg"],
     "programs": ["Arts", "Humanities", "Life Sciences", "Agriculture"],
     "features": ["Home to the La Trobe Institute for Agriculture and Food"]
   },
@@ -223,7 +223,7 @@ export const australianUniversities = [
     "description": "Ranked #1 in SA for student satisfaction.",
     "ranking": "380",
     "type": "Public",
-    "images": ["src/assets/images/Australia/Flinders University/campus.jpg"],
+    "images": ["public/Images/Australia/Flinders University/campus.jpg"],
     "programs": ["Health", "Marine Biology", "Arts", "Science"],
     "features": ["Home to the Flinders Medical Centre"]
   }

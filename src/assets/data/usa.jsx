@@ -8,7 +8,7 @@ export const universities = {
       "description": "A private university specializing in science, technology, and business education with a focus on practical learning.",
       "ranking": "Regional",
       "type": "Private",
-      "images": ["src/assets/images/USA/Washington University of Science and Technology/campus.jpg"],
+      "images": ["public/Images/USA/Washington University of Science and Technology/campus.jpg"],
       "programs": ["Computer Science", "Business Administration", "Cybersecurity", "Data Science"],
       "features": ["STEM-Focused", "Industry Partnerships", "Career-Oriented Programs", "Small Class Sizes"]
     },
@@ -20,7 +20,7 @@ export const universities = {
       "description": "One of the largest public university systems in the U.S., offering quality education across 23 campuses.",
       "ranking": "Varies by Campus",
       "type": "Public",
-      "images": ["src/assets/images/USA/California State University (Multiple Campuses, California)/campus.jpg"],
+      "images": ["public/Images/USA/California State University (Multiple Campuses, California)/campus.jpg"],
       "programs": ["Engineering", "Business", "Education", "Health Sciences"],
       "features": ["Affordable Tuition", "Diverse Programs", "Strong Industry Connections", "Research Opportunities"]
     },
@@ -32,7 +32,7 @@ export const universities = {
       "description": "A private Catholic university known for its strong programs in business, law, and technology, located in the heart of Chicago.",
       "ranking": "127",
       "type": "Private",
-      "images": ["src/assets/images/USA/DePaul University/campus.jpg"],
+      "images": ["public/Images/USA/DePaul University/campus.jpg"],
       "programs": ["Business", "Law", "Computer Science", "Media Studies"],
       "features": ["Chicago Location", "Industry Partnerships", "Career-Oriented Education", "Diverse Student Body"]
     },
@@ -44,7 +44,7 @@ export const universities = {
       "description": "A public research university offering a variety of undergraduate and graduate programs with a focus on applied learning.",
       "ranking": "299",
       "type": "Public",
-      "images": ["src/assets/images/USA/Arkansas State University/campus.jpg"],
+      "images": ["public/Images/USA/Arkansas State University/campus.jpg"],
       "programs": ["Agriculture", "Business", "Engineering", "Health Sciences"],
       "features": ["Affordable Education", "Research Excellence", "Vibrant Campus Life", "Diverse Programs"]
     },
@@ -56,7 +56,7 @@ export const universities = {
       "description": "A public university known for its strong engineering, business, and medical programs, with a focus on research and innovation.",
       "ranking": "298",
       "type": "Public",
-      "images": ["src/assets/images/USA/Wright State University/campus.jpg"],
+      "images": ["public/Images/USA/Wright State University/campus.jpg"],
       "programs": ["Engineering", "Business", "Health Sciences", "Education"],
       "features": ["STEM-Focused", "Research Opportunities", "Diverse Student Body", "Strong Community Engagement"]
     },
@@ -68,7 +68,7 @@ export const universities = {
       "description": "A public university offering high-quality education with a strong emphasis on practical learning and career preparation.",
       "ranking": "Regional Top 50",
       "type": "Public",
-      "images": ["src/assets/images/USA/Weber State University/campus.jpg"],
+      "images": ["public/Images/USA/Weber State University/campus.jpg"],
       "programs": ["Business", "Engineering", "Nursing", "Computer Science"],
       "features": ["Affordable Tuition", "Hands-On Learning", "Diverse Programs", "Small Class Sizes"]
     },
@@ -80,7 +80,7 @@ export const universities = {
       "description": "A private university with a global perspective, offering flexible programs designed for working professionals and international students.",
       "ranking": "Regional Top 20",
       "type": "Private",
-      "images": ["src/assets/images/USA/Webst/campus.jpg"],
+      "images": ["public/Images/USA/Webst/campus.jpg"],
       "programs": ["Business", "International Relations", "Psychology", "Media Studies"],
       "features": ["Global Campus Network", "Flexible Programs", "Career-Oriented Education", "Diverse Student Body"]
     },
@@ -92,7 +92,7 @@ export const universities = {
       "description": "A top-tier public research university offering innovative programs in business, engineering, and health sciences.",
       "ranking": "89",
       "type": "Public",
-      "images": ["src/assets/images/USA/University of South Florida/campus.jpg"],
+      "images": ["public/Images/USA/University of South Florida/campus.jpg"],
       "programs": ["Business", "Engineering", "Health Sciences", "Marine Science"],
       "features": ["Research Excellence", "Diverse Student Body", "Strong Industry Partnerships", "Tropical Campus Environment"]
     },
@@ -104,7 +104,7 @@ export const universities = {
       description: "A public research university known for its strong programs in law, business, and health sciences.",
       ranking: "298",
       type: "Public",
-      images: ["src/assets/images/USA/University of South Dakota/campus.jpg"],
+      images: ["public/Images/USA/University of South Dakota/campus.jpg"],
       programs: ["Business", "Law", "Health Sciences", "Education"],
       features: ["Affordable Tuition", "Strong Research Programs", "Student-Centered Learning", "Vibrant Campus Life"]
     },
@@ -116,7 +116,7 @@ export const universities = {
       description: "A world-renowned private research university specializing in science, engineering, and technology.",
       ranking: "4",
       type: "Private",
-      images: ["src/assets/images/USA/California State University (Multiple Campuses, California)/campus.jpg"],
+      images: ["public/Images/USA/California Institute of Technology (Caltech)/campus.jpg"],
       programs: ["Physics", "Engineering", "Computer Science", "Mathematics"],
       features: ["STEM Focus", "Nobel Laureates", "Cutting-Edge Research", "Small Class Sizes"]
     },
@@ -128,7 +128,7 @@ export const universities = {
       description: "A public university offering diverse academic programs with a strong emphasis on applied learning.",
       ranking: "331",
       type: "Public",
-      images: ["src/assets/images/USA/Youngstown State University/campus.jpg"],
+      images: ["public/Images/USA/Youngstown State University/campus.jpg"],
       programs: ["Engineering", "Business", "Health Sciences", "Education"],
       features: ["Affordable Education", "Career-Focused Programs", "Diverse Student Body", "Strong Community Engagement"]
     },
@@ -140,7 +140,7 @@ export const universities = {
       description: "A large public university known for its research, innovation, and strong academic programs.",
       ranking: "280",
       type: "Public",
-      images: ["src/assets/images/USA/Texas State University/campus.jpg"],
+      images: ["public/Images/USA/Texas State University/campus.jpg"],
       programs: ["Business", "Engineering", "Psychology", "Education"],
       features: ["Research Excellence", "Vibrant Campus Life", "Strong Alumni Network", "Beautiful Hill Country Setting"]
     },
@@ -152,7 +152,7 @@ export const universities = {
       description: "A private liberal arts university focused on personalized education and student success.",
       ranking: "Regional Top 50",
       type: "Private",
-      images: ["src/assets/images/USA/University of Jamestown/campus.jpg"],
+      images: ["public/Images/USA/University of Jamestown/campus.jpg"],
       programs: ["Nursing", "Business", "Education", "Liberal Arts"],
       features: ["Small Class Sizes", "Strong Community", "Personalized Education", "Liberal Arts Tradition"]
     },
@@ -164,7 +164,7 @@ export const universities = {
       "description": "A leading public research university in Virginia, known for its strong programs in economics, law, and cybersecurity.",
       "ranking": "137",
       "type": "Public",
-      "images": ["src/assets/images/USA/George Mason University/campus.jpg"],
+      "images": ["public/Images/USA/George Mason University/campus.jpg"],
       "programs": ["Cybersecurity", "Law", "Economics", "Engineering"],
       "features": ["Research Excellence", "D.C. Proximity", "Diverse Student Body", "Strong Industry Ties"]
     },
@@ -176,7 +176,7 @@ export const universities = {
       "description": "A top-tier public research university with a strong focus on business, international relations, and engineering.",
       "ranking": "151",
       "type": "Public",
-      "images": ["src/assets/images/USA/Florida International University/campus.jpg"],
+      "images": ["public/Images/USA/Florida International University/campus.jpg"],
       "programs": ["Business", "Engineering", "International Relations", "Marine Science"],
       "features": ["Global Perspective", "Diverse Campus", "Strong Research Focus", "Miami Location"]
     },
@@ -188,7 +188,7 @@ export const universities = {
       "description": "A top public research university known for business, engineering, and international studies.",
       "ranking": "151",
       "type": "Public",
-      "images": ["src/assets/images/USA/San Diego State University/campus.jpg"],
+      "images": ["public/Images/USA/San Diego State University/campus.jpg"],
       "programs": ["Business", "Engineering", "Health Sciences", "Psychology"],
       "features": ["Coastal Campus", "High Research Activity", "Diverse Programs", "Sunny Weather"]
     },
@@ -200,7 +200,7 @@ export const universities = {
       "description": "A research-intensive public university, highly regarded for its medical and health science programs.",
       "ranking": "142",
       "type": "Public",
-      "images": ["src/assets/images/USA/University of Alabama at Birmingham/campus.jpg"],
+      "images": ["public/Images/USA/University of Alabama at Birmingham/campus.jpg"],
       "programs": ["Medicine", "Business", "Engineering", "Public Health"],
       "features": ["Medical Research Hub", "Urban Campus", "Diverse Student Body", "Cutting-Edge Facilities"]
     },
@@ -212,7 +212,7 @@ export const universities = {
       "description": "A public university offering strong programs in environmental science, education, and business.",
       "ranking": "National Tier 2",
       "type": "Public",
-      "images": ["src/assets/images/USA/Northern Arizona University/campus.jpg"],
+      "images": ["public/Images/USA/Northern Arizona University/campus.jpg"],
       "programs": ["Environmental Science", "Education", "Business", "Nursing"],
       "features": ["Mountain Campus", "Research Opportunities", "Sustainability Focus", "Small Class Sizes"]
     },
@@ -224,7 +224,7 @@ export const universities = {
       "description": "A metropolitan public university known for its strong urban studies, engineering, and sustainability programs.",
       "ranking": "National Tier 2",
       "type": "Public",
-      "images": ["src/assets/images/USA/Portland State University/campus.jpg"],
+      "images": ["public/Images/USA/Portland State University/campus.jpg"],
       "programs": ["Urban Studies", "Engineering", "Business", "Sustainability"],
       "features": ["Urban Campus", "Research Excellence", "Industry Connections", "Innovative Learning"]
     },
@@ -236,7 +236,7 @@ export const universities = {
       "description": "A public research university known for its music, business, and engineering programs.",
       "ranking": "132",
       "type": "Public",
-      "images": ["src/assets/images/USA/University of North Texas/campus.jpg"],
+      "images": ["public/Images/USA/University of North Texas/campus.jpg"],
       "programs": ["Music", "Business", "Engineering", "Computer Science"],
       "features": ["Music Excellence", "Strong Research Focus", "Large Student Body", "Dallas Proximity"]
     }
