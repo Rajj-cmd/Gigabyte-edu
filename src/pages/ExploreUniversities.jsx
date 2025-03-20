@@ -10,6 +10,7 @@ import { canadianUniversities } from "../assets/data/canada";
 import LoadingSpinner from "../components/LoadingSpinner";
 import UniversityModal from '../components/UniversityModal';
 import Layout from '../components/Layout';
+import RegisterModal from '../components/RegisterModal';
 
 const universities = {
   USA: Array.isArray(usaUniversities.USA) ? usaUniversities.USA : [],
@@ -26,6 +27,7 @@ const ExploreUniversities = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedUniversity, setSelectedUniversity] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState("All");
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   // Add this utility function for shuffling arrays
   const shuffleArray = (array) => {
@@ -41,27 +43,24 @@ const ExploreUniversities = () => {
     const params = new URLSearchParams(location.search);
     const countryParam = params.get('country');
     
-    if (countryParam) {
-      const normalizedCountry = countryParam.toUpperCase();
-      setSelectedCountry(normalizedCountry);
-      
-      setIsLoading(true);
-      try {
-        const universityList = normalizedCountry === "ALL"
-          ? shuffleArray(Object.values(universities).flat()) // Shuffle when showing all universities
-          : universities[normalizedCountry] || [];
-        
-        setFilteredUniversities(universityList);
-      } catch (error) {
-        console.error('Error loading universities:', error);
-        setFilteredUniversities([]);
-      } finally {
-        setIsLoading(false);
+    setIsLoading(true);
+    try {
+      let universityList;
+      if (!countryParam || countryParam.toUpperCase() === "ALL") {
+        universityList = Object.values(universities).flat().filter(Boolean);
+      } else {
+        const normalizedCountry = countryParam.toUpperCase();
+        universityList = universities[normalizedCountry] || [];
       }
-    } else {
-      setSelectedCountry("ALL");
-      // Shuffle when no country is selected
-      setFilteredUniversities(shuffleArray(Object.values(universities).flat()));
+      
+      // Shuffle the university list before filtering
+      const shuffledList = shuffleArray(universityList);
+      setFilteredUniversities(shuffledList.filter(uni => uni && uni.images && uni.images.length > 0));
+      
+    } catch (error) {
+      console.error('Error loading universities:', error);
+      setFilteredUniversities([]);
+    } finally {
       setIsLoading(false);
     }
   }, [location.search]);
@@ -75,6 +74,22 @@ const ExploreUniversities = () => {
     } else {
       navigate(`/explore-universities?country=${normalizedValue}`, { replace: true });
     }
+  };
+
+  const formatCurrency = (value) => {
+    if (typeof value !== 'number') return 'N/A';
+    return value.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    });
+  };
+
+  const handleApplyNow = (university, e) => {
+    e.stopPropagation(); // Prevent event bubbling
+    setSelectedUniversity(university);
+    setIsRegisterOpen(true);
   };
 
   if (!filteredUniversities.length && !isLoading) {
@@ -172,14 +187,14 @@ const ExploreUniversities = () => {
                       </p>
 
                       {/* Stats Grid */}
-                      <div className="grid grid-cols-2 gap-4 mb-8">
+                      <div className="grid md:grid-cols-2 gap-4 mb-8">
                         <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                           <div className="flex items-center text-slate-300 mb-1">
                             <FaDollarSign className="mr-2 text-indigo-400" />
                             Tuition
                           </div>
                           <div className="text-xl font-bold text-white">
-                            ${university.tuition.toLocaleString()}/year
+                            {formatCurrency(university?.tuition)}/year
                           </div>
                         </div>
                         <div className="bg-white/5 rounded-xl p-4 border border-white/10">
@@ -188,7 +203,7 @@ const ExploreUniversities = () => {
                             Living Cost
                           </div>
                           <div className="text-xl font-bold text-white">
-                            ${university.livingCost.toLocaleString()}/year
+                            {formatCurrency(university?.livingCost)}/year
                           </div>
                         </div>
                       </div>
@@ -197,13 +212,13 @@ const ExploreUniversities = () => {
                       <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        onClick={() => setSelectedUniversity(university)}
+                        onClick={(e) => handleApplyNow(university, e)}
                         className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 
                           text-white py-4 rounded-xl font-semibold text-lg
                           transition-all duration-300 hover:shadow-lg
                           hover:shadow-indigo-500/25 flex items-center justify-center gap-2"
                       >
-                        Learn More
+                        Apply Now
                         <FaArrowRight className="text-sm" />
                       </motion.button>
                     </div>
@@ -223,6 +238,16 @@ const ExploreUniversities = () => {
             />
           )}
         </AnimatePresence>
+
+        {/* Register Modal */}
+        <RegisterModal 
+          isOpen={isRegisterOpen}
+          onClose={() => {
+            setIsRegisterOpen(false);
+            setSelectedUniversity(null);
+          }}
+          selectedUniversity={selectedUniversity}
+        />
       </div>
     </Layout>
   );

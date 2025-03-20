@@ -13,6 +13,7 @@ import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import AnimatedLogo from '../components/AnimatedLogo';
 import PropTypes from 'prop-types';
+import graduationBg from '../assets/images/graduation.jpg';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -340,22 +341,80 @@ const Home = () => {
     </section>
   );
 
-  // Get Featured Universities
+  // Update getFeaturedUniversities function to handle missing data
   const getFeaturedUniversities = () => {
     const allUniversities = [
-      ...usaUniversities.USA || [],
-      ...ukUniversities || [],
-      ...australianUniversities || [],
-      ...germanUniversities || [],
-      ...canadianUniversities || []
-    ];
-    
-    return allUniversities
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 6); // Changed from 3 to 6
+      ...(usaUniversities.USA || []),
+      ...(ukUniversities || []),
+      ...(australianUniversities || []),
+      ...(germanUniversities || []),
+      ...(canadianUniversities || [])
+    ].filter(uni => uni && uni.images && uni.images.length > 0); // Filter out invalid entries
+
+    // Shuffle and return only if we have universities
+    return allUniversities.length > 0 
+      ? shuffleArray(allUniversities).slice(0, 6)
+      : [];
+  };
+
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
   };
 
   const [featuredUniversities] = useState(getFeaturedUniversities());
+
+  // Add index parameter to renderUniversity function
+  const renderUniversity = (university, index) => {
+    if (!university || !university.images || !university.images[0]) {
+      return null;
+    }
+
+    return (
+      <motion.div
+        key={index}
+        whileHover={{ scale: 1.05 }}
+        className="bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 
+          hover:bg-white/10 transition-all duration-300 cursor-pointer"
+        onClick={() => navigate(`/explore-universities?country=${university.type}&university=${university.name}`)}
+      >
+        <div className="relative h-48 overflow-hidden">
+          <img
+            src={university.images[0]}
+            alt={university.name}
+            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+            onError={(e) => {
+              e.target.src = "https://images.unsplash.com/photo-1592280771190-3e2e4d571952";
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50" />
+        </div>
+
+        <div className="p-6">
+          <h3 className="text-xl font-bold text-white mb-2">{university.name}</h3>
+          <p className="text-slate-400 mb-4 flex items-center">
+            <FaMapMarkerAlt className="mr-2 text-indigo-400" />
+            {university.location}
+          </p>
+          
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-slate-300">
+              <FaUniversity className="inline mr-2 text-indigo-400" />
+              {university.type}
+            </span>
+            <span className="text-slate-300">
+              <FaUsers className="inline mr-2 text-indigo-400" />
+              Ranking: {university.ranking}
+            </span>
+          </div>
+        </div>
+      </motion.div>
+    );
+  };
 
   // Render Featured Universities
   const renderFeaturedUniversities = () => (
@@ -376,58 +435,7 @@ const Home = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {featuredUniversities.map((university, index) => (
-            <motion.div
-              key={university.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden 
-                border border-white/10 hover:border-indigo-500/50 
-                transition-all duration-300 group cursor-pointer"
-              onClick={() => {
-                const encodedName = encodeURIComponent(university.name);
-                const countryCode = university.location.includes("USA") ? "USA" :
-                                  university.location.includes("UK") ? "UK" :
-                                  university.location.includes("Canada") ? "CANADA" :
-                                  university.location.includes("Australia") ? "AUSTRALIA" :
-                                  "GERMANY";
-                navigate(`/explore-universities?country=${countryCode}&university=${encodedName}`);
-              }}
-            >
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={university.images[0]}
-                  alt={university.name}
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                  onError={(e) => {
-                    e.target.src = "https://images.unsplash.com/photo-1523050854058-8df90110c9f1";
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50" />
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-2">{university.name}</h3>
-                <p className="text-slate-400 mb-4 flex items-center">
-                  <FaMapMarkerAlt className="mr-2 text-indigo-400" />
-                  {university.location}
-                </p>
-                
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-slate-300">
-                    <FaUniversity className="inline mr-2 text-indigo-400" />
-                    {university.type}
-                  </span>
-                  <span className="text-slate-300">
-                    <FaUsers className="inline mr-2 text-indigo-400" />
-                    Ranking: {university.ranking}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          {featuredUniversities.map((university, index) => renderUniversity(university, index))}
         </div>
 
         <motion.div
@@ -479,28 +487,21 @@ const Home = () => {
         <div className="relative">
           {/* Update section refs */}
           <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900">
-            {/* Background Image Overlay */}
-            <div className="absolute inset-0">
-              <motion.div 
-                initial={{ scale: 1.1 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-                className="absolute inset-0"
-              >
-                <img 
-                  src="src/assets/images/Graduation.jpg" 
-                  alt="University Campus"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-900/90" />
-              </motion.div>
+            {/* Add Image Overlay */}
+            <div className="absolute inset-0 z-0">
+              <img
+                src={graduationBg}
+                alt="Graduation ceremony"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-900/90" />
             </div>
 
-            {/* Content Container */}
-            <div className="relative container mx-auto px-4 py-32">
-              <div className="flex items-center justify-between max-w-7xl mx-auto">
+            {/* Existing hero content with higher z-index */}
+            <div className="relative z-10 container mx-auto px-4 py-24 md:py-32">
+              <div className="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto">
                 {/* Text Content */}
-                <div className="flex-1 max-w-3xl">
+                <div className="flex-1 max-w-3xl text-center md:text-left mb-12 md:mb-0">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -515,7 +516,7 @@ const Home = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
-                    className="text-6xl lg:text-8xl font-bold mb-6"
+                    className="text-4xl md:text-6xl lg:text-8xl font-bold mb-6"
                   >
                     <span className="text-white block mb-2">Transform Your</span>
                     <span className="text-transparent bg-clip-text bg-gradient-to-r 
@@ -538,7 +539,7 @@ const Home = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 }}
-                    className="flex flex-col sm:flex-row items-center sm:items-start 
+                    className="flex flex-col sm:flex-row items-center justify-center md:justify-start 
                       space-y-4 sm:space-y-0 sm:space-x-4"
                   >
                     <button
@@ -551,7 +552,7 @@ const Home = () => {
                       Explore Universities
                     </button>
                     <button
-                      onClick={onRegisterClick}
+                      onClick={() => navigate('/contact')} // Changed to navigate to contact page
                       className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 
                         rounded-xl text-lg font-semibold text-white w-full sm:w-auto
                         hover:bg-white/20 transition-all duration-300"
@@ -561,18 +562,26 @@ const Home = () => {
                   </motion.div>
                 </div>
 
-                {/* Logo with Symbols */}
+                {/* Logo with Symbols - Show on larger screens */}
                 <div className="hidden md:flex flex-col items-center">
-                  <div className="w-[300px] h-[300px] mb-4">
+                  {/* Adjusted size and added better container styling */}
+                  <div className="relative w-[400px] h-[400px] flex items-center justify-center">
+                    {/* Add a subtle glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-3xl" />
                     <AnimatedLogo className="w-full h-full" />
                   </div>
-                  {/* Symbols positioned below logo */}
-                  <div className="flex items-center justify-center space-x-4">
-                    <FaGraduationCap className="text-indigo-400 text-xl hover:text-indigo-300 transition-colors" />
-                    <FaGlobeAmericas className="text-purple-400 text-xl hover:text-purple-300 transition-colors" />
-                    <FaUniversity className="text-pink-400 text-xl hover:text-pink-300 transition-colors" />
-                    <FaUsers className="text-blue-400 text-xl hover:text-blue-300 transition-colors" />
-                  </div>
+                  {/* Improved spacing and animation for symbols */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1 }}
+                    className="flex items-center justify-center space-x-6 mt-8"
+                  >
+                    <FaGraduationCap className="text-2xl text-indigo-400 hover:text-indigo-300 transition-colors" />
+                    <FaGlobeAmericas className="text-2xl text-purple-400 hover:text-purple-300 transition-colors" />
+                    <FaUniversity className="text-2xl text-pink-400 hover:text-pink-300 transition-colors" />
+                    <FaUsers className="text-2xl text-blue-400 hover:text-blue-300 transition-colors" />
+                  </motion.div>
                 </div>
 
               </div>

@@ -1,109 +1,305 @@
-import algomacampus from '../images/Canada/Algoma University - Brampton/campus.jpg';
-import bcitcampus from '../images/Canada/British Columbia Institute of Technology - Burnaby (BCIT)/campus.jpg';
-import ibtcampus from '../images/Canada/IBT College/campus.jpg';
-
-import niagaracampus from '../images/Canada/Niagara College - Niagara-on-the-Lake/campus.jpg';
-import reginacampus from '../images/Canada/University of Regina/campus.jpg';
-import usaskcampus from '../images/Canada/University of Saskatchewan (USASK)/campus.jpg';
-
-import fraservalleycampus from '../images/Canada/University of the Fraser Valley (UFV)/campus.jpg';
-import yorkvillecampus from '../images/Canada/Yorkville University - Vancouver/campus.jpg';
-
 export const canadianUniversities = [
   {
     name: "University of Regina",
     location: "Regina, Saskatchewan, Canada",
     tuition: 22000,
-    livingCost: 12000,
-    description: "A comprehensive university known for its experiential learning and research opportunities.",
-    ranking: "801-1000",
+    livingCost: 15000,
+    description: "A comprehensive university known for energy and environmental research programs.",
+    ranking: "601-650",
     type: "Public",
-    images: [algomacampus],
-    programs: ["Business Administration", "Engineering", "Social Work", "Media Studies"],
-    features: ["Experiential Learning", "Research Focus", "Affordable Living", "Community Engagement"]
+    images: ["src/assets/images/Canada/University of Regina/campus.jpg"],
+    programs: ["Energy Studies", "Environmental Science", "Business", "Engineering"],
+    features: ["Research Excellence", "Affordable Living", "Modern Facilities", "Industry Partners"]
   },
   {
-    name: "Niagara College - Niagara-on-the-Lake",
+    name: "Niagara College",
     location: "Niagara-on-the-Lake, Ontario, Canada",
-    tuition: 16000,
-    livingCost: 14000,
-    description: "Known for its strong focus on applied arts, technology, and wine studies.",
-    ranking: "N/A (College)",
+    tuition: 18000,
+    livingCost: 18000,
+    description: "Known for wine and culinary programs with on-campus teaching facilities.",
+    ranking: "Top 50 Canadian Colleges",
     type: "Public",
-    images: [niagaracampus],
-    programs: ["Hospitality Management", "Wine Business", "Culinary Arts", "Film Production"],
-    features: ["Hands-On Learning", "Wine Research Center", "Industry Partnerships", "Scenic Location"]
+    images: ["src/assets/images/Canada/Niagara College/campus.jpg"],
+    programs: ["Wine Studies", "Culinary Arts", "Hospitality", "Business"],
+    features: ["Teaching Winery", "Teaching Brewery", "Industry Partners", "Practical Learning"]
   },
   {
-    name: "British Columbia Institute of Technology - Burnaby (BCIT)",
+    name: "British Columbia Institute of Technology (BCIT) - Burnaby",
     location: "Burnaby, British Columbia, Canada",
     tuition: 18000,
-    livingCost: 15000,
-    description: "A leading polytechnic institution known for its practical, career-focused education.",
-    ranking: "N/A (Polytechnic)",
+    livingCost: 24000,
+    description: "Top polytechnic for engineering and technology with a high graduate employment rate.",
+    ranking: "#1 Canadian Polytechnic",
     type: "Public",
-    images: [bcitcampus],
-    programs: ["Engineering Technology", "Business Management", "Health Sciences", "Computing"],
-    features: ["Industry-Relevant Programs", "Co-op Opportunities", "Modern Facilities", "Strong Alumni Network"]
+    images: ["src/assets/images/Canada/British Columbia Institute of Technology (BCIT) - Burnaby/campus.jpg"],
+    programs: ["Engineering", "Technology", "Business", "Health Sciences"],
+    features: ["High Employment Rate", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
   {
-    name: "IBT College",
+    name: "IBT College - Toronto",
     location: "Toronto, Ontario, Canada",
-    tuition: 14000,
-    livingCost: 18000,
-    description: "A private career college offering specialized programs in business, technology, and healthcare.",
-    ranking: "N/A (Private College)",
+    tuition: 13500,
+    livingCost: 24000,
+    description: "Focus on healthcare and IT diplomas with small class sizes and hands-on training.",
+    ranking: "Niche Vocational College",
     type: "Private",
-    images: [ibtcampus],
-    programs: ["Business Administration", "Information Technology", "Healthcare Management", "Digital Marketing"],
-    features: ["Career-Focused Programs", "Small Class Sizes", "Industry Connections", "Urban Location"]
+    images: ["src/assets/images/Canada/IBT College - Toronto/campus.jpg"],
+    programs: ["Healthcare", "Information Technology", "Business", "Hospitality"],
+    features: ["Small Class Sizes", "Hands-on Training", "Industry Partners", "Modern Facilities"]
   },
   {
-    name: "University of the Fraser Valley (UFV)",
+    name: "University of the Fraser Valley (UFV) - Abbotsford",
     location: "Abbotsford, British Columbia, Canada",
-    tuition: 19000,
-    livingCost: 13000,
-    description: "A dynamic university offering a mix of academic and vocational programs.",
-    ranking: "N/A (Regional University)",
+    tuition: 19500,
+    livingCost: 16800,
+    description: "Strong agriculture and aviation programs with affordable living costs.",
+    ranking: "#1,300+ Globally",
     type: "Public",
-    images: [fraservalleycampus],
-    programs: ["Agriculture", "Criminology", "Business Administration", "Fine Arts"],
-    features: ["Affordable Tuition", "Community Focus", "Hands-On Learning", "Scenic Campus"]
+    images: ["src/assets/images/Canada/University of the Fraser Valley (UFV) - Abbotsford/campus.jpg"],
+    programs: ["Agriculture", "Aviation", "Business", "Health Sciences"],
+    features: ["Affordable Living", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
   {
     name: "Algoma University - Brampton",
     location: "Brampton, Ontario, Canada",
-    tuition: 20000,
-    livingCost: 15000,
-    description: "A small, student-focused university offering personalized education.",
-    ranking: "N/A (Regional University)",
+    tuition: 17500,
+    livingCost: 21600,
+    description: "Focus on social justice and Indigenous studies with a satellite campus near Toronto.",
+    ranking: "#120+ in Canada",
     type: "Public",
-    images: [algomacampus],
-    programs: ["Business Administration", "Computer Science", "Social Work", "Psychology"],
-    features: ["Small Class Sizes", "Personalized Learning", "Urban Campus", "Diverse Community"]
+    images: ["src/assets/images/Canada/Algoma University - Brampton/campus.jpg"],
+    programs: ["Social Justice", "Indigenous Studies", "Business", "Health Sciences"],
+    features: ["Satellite Campus", "Industry Partners", "Modern Facilities", "Research Excellence"]
   },
   {
-    name: "University of Saskatchewan (USASK)",
+    name: "University of Saskatchewan (USASK) - Saskatoon",
     location: "Saskatoon, Saskatchewan, Canada",
-    tuition: 23000,
-    livingCost: 14000,
-    description: "A leading research university known for its agriculture, health, and environmental programs.",
-    ranking: "465",
+    tuition: 26500,
+    livingCost: 16800,
+    description: "Leading research in agriculture and vaccines with the Canadian Light Source synchrotron.",
+    ranking: "#473 Globally",
     type: "Public",
-    images: [usaskcampus],
-    programs: ["Agriculture", "Medicine", "Engineering", "Environmental Studies"],
-    features: ["Research Excellence", "Agriculture Focus", "Modern Facilities", "Community Engagement"]
+    images: ["src/assets/images/Canada/University of Saskatchewan (USASK) - Saskatoon/campus.jpg"],
+    programs: ["Agriculture", "Health Sciences", "Engineering", "Business"],
+    features: ["Research Excellence", "Industry Partners", "Modern Facilities", "High Employment Rate"]
   },
   {
     name: "Yorkville University - Vancouver",
     location: "Vancouver, British Columbia, Canada",
-    tuition: 21000,
-    livingCost: 20000,
-    description: "A private university offering flexible programs in business, counseling, and creative arts.",
-    ranking: "N/A (Private University)",
+    tuition: 22500,
+    livingCost: 26400,
+    description: "Specializes in counseling and design degrees with flexible online and on-campus options.",
+    ranking: "Niche Private University",
     type: "Private",
-    images: [yorkvillecampus],
-    programs: ["Business Administration", "Counseling Psychology", "Creative Arts", "Project Management"],
-    features: ["Flexible Learning", "Small Class Sizes", "Industry-Relevant Programs", "Urban Campus"]
+    images: ["src/assets/images/Canada/Yorkville University - Vancouver/campus.jpg"],
+    programs: ["Counseling", "Design", "Business", "Health Sciences"],
+    features: ["Flexible Options", "Industry Partners", "Modern Facilities", "Research Excellence"]
+  },
+  {
+    name: "Seneca College - Toronto",
+    location: "Toronto, Ontario, Canada",
+    tuition: 16500,
+    livingCost: 24000,
+    description: "Canada's largest college with top programs in aviation and animation.",
+    ranking: "Top 10 Canadian Colleges",
+    type: "Public",
+    images: ["src/assets/images/Canada/Seneca College - Toronto/campus.jpg"],
+    programs: ["Aviation", "Animation", "Business", "Health Sciences"],
+    features: ["Large Student Body", "Industry Partners", "Modern Facilities", "Research Excellence"]
+  },
+  {
+    name: "Thompson Rivers University - Kamloops",
+    location: "Kamloops, British Columbia, Canada",
+    tuition: 22500,
+    livingCost: 16800,
+    description: "Known for adventure tourism and nursing with a focus on open learning and distance education.",
+    ranking: "#1,200+ Globally",
+    type: "Public",
+    images: ["src/assets/images/Canada/Thompson Rivers University - Kamloops/campus.jpg"],
+    programs: ["Adventure Tourism", "Nursing", "Business", "Health Sciences"],
+    features: ["Open Learning", "Industry Partners", "Modern Facilities", "Research Excellence"]
+  },
+  {
+    name: "Northern Alberta Institute of Technology (NAIT) - Edmonton",
+    location: "Edmonton, Alberta, Canada",
+    tuition: 20000,
+    livingCost: 19200,
+    description: "Leading polytechnic for applied technology with partnerships with Shell Canada and PCL Construction.",
+    ranking: "Top 5 Canadian Polytechnics",
+    type: "Public",
+    images: ["src/assets/images/Canada/Northern Alberta Institute of Technology (NAIT) - Edmonton/campus.jpg"],
+    programs: ["Applied Technology", "Engineering", "Business", "Health Sciences"],
+    features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
+  },
+  {
+    name: "Trent University - Peterborough",
+    location: "Peterborough, Ontario, Canada",
+    tuition: 27000,
+    livingCost: 15600,
+    description: "Strong environmental science programs with a top ranking as an undergraduate university in Ontario.",
+    ranking: "#1,000+ Globally",
+    type: "Public",
+    images: ["src/assets/images/Canada/Trent University - Peterborough/campus.jpg"],
+    programs: ["Environmental Science", "Business", "Health Sciences", "Social Sciences"],
+    features: ["Research Excellence", "Industry Partners", "Modern Facilities", "High Employment Rate"]
+  },
+  {
+    name: "Red River College Polytechnic - Winnipeg",
+    location: "Winnipeg, Manitoba, Canada",
+    tuition: 17000,
+    livingCost: 12000,
+    description: "Largest applied learning institution in Manitoba with strong aerospace and robotics programs.",
+    ranking: "Top 15 Canadian Colleges",
+    type: "Public",
+    images: ["src/assets/images/Canada/Red River College Polytechnic - Winnipeg/campus.jpg"],
+    programs: ["Aerospace", "Robotics", "Business", "Health Sciences"],
+    features: ["Applied Learning", "Industry Partners", "Modern Facilities", "Research Excellence"]
+  },
+  {
+    name: "Mount Allison University - Sackville",
+    location: "Sackville, New Brunswick, Canada",
+    tuition: 22500,
+    livingCost: 10800,
+    description: "Top undergraduate university in Canada with 56 Rhodes Scholars among alumni.",
+    ranking: "#4 Undergraduate Universities",
+    type: "Public",
+    images: ["src/assets/images/Canada/Mount Allison University - Sackville/campus.jpg"],
+    programs: ["Liberal Arts", "Business", "Health Sciences", "Social Sciences"],
+    features: ["Research Excellence", "Industry Partners", "Modern Facilities", "High Employment Rate"]
+  },
+  {
+    name: "St. Francis Xavier University - Antigonish",
+    location: "Antigonish, Nova Scotia, Canada",
+    tuition: 25000,
+    livingCost: 12000,
+    description: "Notable for business and liberal arts with the Coady International Institute.",
+    ranking: "#5 Undergraduate Universities",
+    type: "Public",
+    images: ["src/assets/images/Canada/St. Francis Xavier University - Antigonish/campus.jpg"],
+    programs: ["Business", "Liberal Arts", "Health Sciences", "Social Sciences"],
+    features: ["Research Excellence", "Industry Partners", "Modern Facilities", "High Employment Rate"]
+  },
+  {
+    name: "SAIT Polytechnic - Calgary",
+    location: "Calgary, Alberta, Canada",
+    tuition: 18500,
+    livingCost: 21600,
+    description: "Top programs in petroleum engineering with partnerships with CP Rail and Telus.",
+    ranking: "Top 3 Polytechnics in Canada",
+    type: "Public",
+    images: ["src/assets/images/Canada/SAIT Polytechnic - Calgary/campus.jpg"],
+    programs: ["Petroleum Engineering", "Applied Technology", "Business", "Health Sciences"],
+    features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
+  },
+  {
+    name: "Humber College - Toronto",
+    location: "Toronto, Ontario, Canada",
+    tuition: 18000,
+    livingCost: 24000,
+    description: "Canada’s largest film and acting school with strong media and hospitality programs.",
+    ranking: "Top 10 Canadian Colleges",
+    type: "Public",
+    images: ["src/assets/images/Canada/Humber College - Toronto/campus.jpg"],
+    programs: ["Film", "Acting", "Media", "Hospitality"],
+    features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
+  },
+  {
+    name: "Vancouver Island University - Nanaimo",
+    location: "Nanaimo, British Columbia, Canada",
+    tuition: 19500,
+    livingCost: 18000,
+    description: "Focus on marine biology and Indigenous education with an affordable coastal campus.",
+    ranking: "#1,400+ Globally",
+    type: "Public",
+    images: ["src/assets/images/Canada/Vancouver Island University - Nanaimo/campus.jpg"],
+    programs: ["Marine Biology", "Indigenous Education", "Business", "Health Sciences"],
+    features: ["Affordable Living", "Industry Partners", "Modern Facilities", "Research Excellence"]
+  },
+  {
+    name: "Confederation College - Thunder Bay",
+    location: "Thunder Bay, Ontario, Canada",
+    tuition: 16000,
+    livingCost: 10800,
+    description: "Leading aviation and forestry programs with an Indigenous-focused curriculum.",
+    ranking: "Top 20 Canadian Colleges",
+    type: "Public",
+    images: ["src/assets/images/Canada/Confederation College - Thunder Bay/campus.jpg"],
+    programs: ["Aviation", "Forestry", "Business", "Health Sciences"],
+    features: ["Indigenous Curriculum", "Industry Partners", "Modern Facilities", "Research Excellence"]
+  },
+  {
+    name: "Holland College - Charlottetown",
+    location: "Charlottetown, Prince Edward Island, Canada",
+    tuition: 14500,
+    livingCost: 10800,
+    description: "PEI’s primary vocational college famous for culinary and maritime training.",
+    ranking: "Top 25 Canadian Colleges",
+    type: "Public",
+    images: ["src/assets/images/Canada/Holland College - Charlottetown/campus.jpg"],
+    programs: ["Culinary Arts", "Maritime Training", "Business", "Health Sciences"],
+    features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
+  },
+  {
+    name: "Laurentian University - Sudbury",
+    location: "Sudbury, Ontario, Canada",
+    tuition: 27000,
+    livingCost: 12000,
+    description: "Bilingual (English/French) programs with strong mining engineering and astronomy.",
+    ranking: "#1,200+ Globally",
+    type: "Public",
+    images: ["src/assets/images/Canada/Laurentian University - Sudbury/campus.jpg"],
+    programs: ["Mining Engineering", "Astronomy", "Business", "Health Sciences"],
+    features: ["Bilingual Programs", "Industry Partners", "Modern Facilities", "Research Excellence"]
+  },
+  {
+    name: "Kwantlen Polytechnic University (KPU) - Surrey",
+    location: "Surrey, British Columbia, Canada",
+    tuition: 21500,
+    livingCost: 21600,
+    description: "Canada’s only polytechnic university with strong fashion design and brewing programs.",
+    ranking: "#1,500+ Globally",
+    type: "Public",
+    images: ["https://www.kpu.ca/sites/default/files/styles/hero_image/public/2022-04/kpu-surrey-campus.jpg"],
+    programs: ["Fashion Design", "Brewing", "Business", "Health Sciences"],
+    features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
+  },
+  {
+    name: "OCAD University - Toronto",
+    location: "Toronto, Ontario, Canada",
+    tuition: 27000,
+    livingCost: 24000,
+    description: "Canada’s top art and design university with notable alumni including Ken Danby and Barbara Astman.",
+    ranking: "#1 in Art/Design in Canada",
+    type: "Public",
+    images: ["src/assets/images/Canada/OCAD University - Toronto/campus.jpg"],
+    programs: ["Art", "Design", "Media", "Business"],
+    features: ["Notable Alumni", "Industry Partners", "Modern Facilities", "Research Excellence"]
+  },
+  {
+    name: "University of Northern British Columbia (UNBC) - Prince George",
+    location: "Prince George, British Columbia, Canada",
+    tuition: 22500,
+    livingCost: 12000,
+    description: "Renowned for forestry and environmental studies with small class sizes in a northern setting.",
+    ranking: "#1,400+ Globally",
+    type: "Public",
+    images: ["src/assets/images/Canada/University of Northern British Columbia (UNBC) - Prince George/campus.jpg"],
+    programs: ["Forestry", "Environmental Studies", "Business", "Health Sciences"],
+    features: ["Small Class Sizes", "Industry Partners", "Modern Facilities", "Research Excellence"]
+  },
+  {
+    name: "Lethbridge College - Lethbridge",
+    location: "Lethbridge, Alberta, Canada",
+    tuition: 16000,
+    livingCost: 10800,
+    description: "Leading agriculture and wind turbine programs with the first Canadian college to offer a degree.",
+    ranking: "Top 30 Canadian Colleges",
+    type: "Public",
+    images: ["src/assets/images/Canada/Lethbridge College - Lethbridge/campus.jpg"],
+    programs: ["Agriculture", "Wind Turbine Technology", "Business", "Health Sciences"],
+    features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
   }
-];
+].map(uni => ({
+  ...uni,
+  livingCost: Math.floor(uni.livingCost * 0.65) // Reduce living costs by 35%
+}));

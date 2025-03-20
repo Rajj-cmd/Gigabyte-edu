@@ -189,7 +189,7 @@ const Navbar = ({ onRegisterClick }) => {
     }`}>
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          {/* Updated Logo section with hover animation */}
+          {/* Logo section */}
           <div className="flex items-center">
             <motion.button 
               onClick={scrollToHero} 
@@ -198,18 +198,13 @@ const Navbar = ({ onRegisterClick }) => {
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               <div className="flex flex-col">
-                <span className="text-lg sm:text-xl font-bold text-white tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-indigo-400 group-hover:via-purple-400 group-hover:to-pink-400 transition-all duration-300">
+                <span className="text-base sm:text-xl font-bold text-white tracking-wide">
                   Gigabyte
                 </span>
-                <span className="text-xs sm:text-sm text-indigo-400 font-medium group-hover:text-indigo-300 transition-colors duration-300">
+                <span className="text-[10px] sm:text-sm text-indigo-400">
                   Education Consultancy
                 </span>
               </div>
-              <motion.div
-                className="absolute -inset-x-2 -inset-y-1 bg-white/5 rounded-lg opacity-0 group-hover:opacity-100 -z-10"
-                initial={false}
-                transition={{ duration: 0.3 }}
-              />
             </motion.button>
           </div>
 
@@ -287,11 +282,12 @@ const Navbar = ({ onRegisterClick }) => {
             </button>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          {/* Mobile menu button - Improved touch target */}
+          <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-white p-2"
+              className="text-gray-300 hover:text-white p-3"
+              style={{ touchAction: 'manipulation' }}
             >
               {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </button>
@@ -299,15 +295,20 @@ const Navbar = ({ onRegisterClick }) => {
         </div>
       </div>
 
-      {/* Mobile menu - Adjusted height and scrolling */}
+      {/* Mobile menu - Improved scrolling and touch interaction */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden fixed top-16 left-0 right-0 bg-slate-800/95 backdrop-blur-md border-t border-slate-700/50"
-            style={{ maxHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}
+            className="md:hidden fixed top-16 left-0 right-0 bg-slate-800/95 backdrop-blur-md 
+              border-t border-slate-700/50 overflow-auto"
+            style={{ 
+              maxHeight: 'calc(100vh - 64px)',
+              overflowY: 'auto',
+              WebkitOverflowScrolling: 'touch'
+            }}
           >
             <div className="px-2 pt-2 pb-3 space-y-1 max-h-[80vh] overflow-y-auto">
               {/* Social Media Icons for Mobile */}

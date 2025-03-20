@@ -121,7 +121,7 @@ const Layout = ({ children }) => {
               <h3 className="text-xl font-bold text-indigo-400 mb-4">Follow Us</h3>
               <div className="flex space-x-4">
                 <a
-                  href="https://www.linkedin.com/in/suman-pathak-702165276/"
+                  href="https://www.linkedin.com/company/gigabyte-education-consultancy-pvt-ltd/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-700 hover:text-blue-500 transition-colors"
@@ -137,7 +137,7 @@ const Layout = ({ children }) => {
                   <FaFacebook size={32} />
                 </a>
                 <a
-                  href="https://gigabyteeducationconsultancy.com"
+                  href="mailto:gigabyte.edu@gmail.com "
                   className="text-red-600 hover:text-red-400 transition-colors"
                 >
                   <FaEnvelope size={32} />
