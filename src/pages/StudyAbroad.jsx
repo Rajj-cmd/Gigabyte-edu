@@ -12,6 +12,9 @@ import { australianUniversities } from "../assets/data/australia";
 import { germanUniversities } from "../assets/data/germany";
 import { canadianUniversities } from "../assets/data/canada";
 
+// Add fallback image constant
+const DEFAULT_IMAGE = "/images/placeholders/default-campus.jpg";
+
 const StudyAbroad = () => {
   const navigate = useNavigate();
 
