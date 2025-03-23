@@ -250,7 +250,7 @@ export const canadianUniversities = [
     images: ["Images/Canada/Kwantlen Polytechnic University (KPU) - Surrey/campus.jpg"],
     programs: ["Fashion Design", "Brewing", "Business", "Health Sciences"],
     features: ["Industry Partners", "Modern Facilities", "High Employment Rate", "Research Excellence"]
-  },
+  }, // updated //
   {
     name: "OCAD University - Toronto",
     location: "Toronto, Ontario, Canada",
