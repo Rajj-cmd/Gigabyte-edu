@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { FaUser, FaEnvelope, FaGraduationCap, FaGlobe, FaPhone } from "react-icons/fa";
 import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const Register = ({ onClose }) => {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
