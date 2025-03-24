@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -95,13 +97,78 @@ html {
 /* Adjust text sizes for mobile */
 @media (max-width: 640px) {
   h1 {
-    font-size: 2rem !important;
+    font-size: 2.5rem !important;
     line-height: 1.2 !important;
   }
   h2 {
+    font-size: 2rem !important;
+  }
+  h3 {
     font-size: 1.5rem !important;
   }
   p {
     font-size: 1rem !important;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Improve touch targets */
+  button, 
+  [role="button"],
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Adjust spacing */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Improve mobile grid layouts */
+  .grid {
+    gap: 1rem;
+  }
+
+  /* Better mobile scrolling */
+  .overflow-auto,
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Adjust modal positioning */
+  .modal-content {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+  }
+}
+
+/* Improved touch interactions */
+@media (hover: none) {
+  .hover\:scale-105 {
+    transform: none !important;
+  }
+  
+  .hover\:shadow-lg {
+    box-shadow: none !important;
+  }
+}
+
+/* Better form elements on mobile */
+input,
+select,
+textarea {
+  font-size: 16px !important; /* Prevents zoom on iOS */
+}
+
+/* Add smooth scrolling but disable on reduced motion preference */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }

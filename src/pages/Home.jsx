@@ -588,111 +588,115 @@ const Home = () => {
             </div>
           </section>
 
-          <section ref={aboutRef} id="about" className="relative min-h-screen">
-            <div className="relative min-h-screen">
-              <motion.div 
-                className="absolute inset-0 z-0"
-                style={{ 
-                  backgroundImage: "url('https://images.unsplash.com/photo-1577412647305-991150c7d163?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
-                <motion.div 
-                  style={{ opacity: overlayOpacity }}
-                  className="absolute inset-0 bg-gradient-to-b from-slate-900/98 via-slate-900/95 to-slate-900/98"
-                />
-              </motion.div>
+          <section ref={aboutRef} className="relative min-h-screen w-screen overflow-hidden bg-slate-900">
+            {/* Add Background Overlay */}
+            <motion.div 
+              className="absolute inset-0 z-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              style={{
+                backgroundImage: "url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundAttachment: "fixed"
+              }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-slate-900/95" />
+            </motion.div>
 
-              <div className="relative z-10 container mx-auto px-4 py-20">
-                <div className="grid md:grid-cols-2 gap-16 items-start">
-                  <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                    className="backdrop-blur-sm bg-white/10 rounded-3xl p-8 shadow-2xl"
-                  >
-                    <div className="flex flex-col items-center text-center mb-8">
-                      <div className="relative w-48 h-48 mb-6">
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-spin-slow" />
-                        <img
-                          src={founderImage}
-                          alt="Suman Pathak"
-                          className="rounded-full w-full h-full object-cover border-4 border-white relative z-10"
-                        />
-                      </div>
-                      <h2 className="text-3xl font-bold text-white mb-2">Suman Pathak</h2>
-                      <p className="text-indigo-300 font-semibold">Founder & Lead Consultant</p>
-                      <a 
-                        href="https://www.linkedin.com/in/suman-pathak-702165276/" // Update this line with the new LinkedIn URL
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-4 inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors"
-                      >
-                        <FaLinkedin size={24} className="mr-2" />
-                        Connect on LinkedIn
-                      </a>
+            {/* Content Container - Add relative z-index */}
+            <div className="relative z-10 container mx-auto px-4 py-24">
+              <div className="grid md:grid-cols-2 gap-16 items-start">
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                  className="backdrop-blur-sm bg-white/10 rounded-3xl p-8 shadow-2xl"
+                >
+                  <div className="flex flex-col items-center text-center mb-8">
+                    <div className="relative w-48 h-48 mb-6">
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-spin-slow" />
+                      <img
+                        src={founderImage}
+                        alt="Suman Pathak"
+                        className="rounded-full w-full h-full object-cover border-4 border-white relative z-10"
+                      />
                     </div>
-                    <div className="text-slate-300 space-y-4">
-                      <p className="leading-relaxed">
-                      Suman Pathak is the Lead Consultant and Founder of Gigabyte Education Consultancy, bringing over 7 years of expertise in the education consultancy field. With a deep commitment to helping students achieve their academic goals, Suman has successfully guided numerous applicants toward securing places in their dream universities. His vast experience and personalized approach have made him a trusted advisor for students looking to study abroad, ensuring they receive the support and insights needed for a successful academic journey.
-                      </p>
-                      <ul className="space-y-2">
-                        <li className="flex items-center">
-                          <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
-                          Certified Education Consultant
-                        </li>
-                        <li className="flex items-center">
-                          <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
-                          Expert in International University Admissions
-                        </li>
-                        <li className="flex items-center">
-                          <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
-                          Specialized in Study Abroad Programs
-                        </li>
-                      </ul>
-                    </div>
-                  </motion.div>
+                    <h2 className="text-3xl font-bold text-white mb-2">Suman Pathak</h2>
+                    <p className="text-indigo-300 font-semibold">Founder & Lead Consultant</p>
+                    <a 
+                      href="https://www.linkedin.com/in/suman-pathak-702165276/" // Update this line with the new LinkedIn URL
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors"
+                    >
+                      <FaLinkedin size={24} className="mr-2" />
+                      Connect on LinkedIn
+                    </a>
+                  </div>
+                  <div className="text-slate-300 space-y-4">
+                    <p className="leading-relaxed">
+                    Suman Pathak is the Lead Consultant and Founder of Gigabyte Education Consultancy, bringing over 7 years of expertise in the education consultancy field. With a deep commitment to helping students achieve their academic goals, Suman has successfully guided numerous applicants toward securing places in their dream universities. His vast experience and personalized approach have made him a trusted advisor for students looking to study abroad, ensuring they receive the support and insights needed for a successful academic journey.
+                    </p>
+                    <ul className="space-y-2">
+                      <li className="flex items-center">
+                        <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
+                        Certified Education Consultant
+                      </li>
+                      <li className="flex items-center">
+                        <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
+                        Expert in International University Admissions
+                      </li>
+                      <li className="flex items-center">
+                        <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
+                        Specialized in Study Abroad Programs
+                      </li>
+                    </ul>
+                  </div>
+                </motion.div>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    viewport={{ once: true }}
-                    className="backdrop-blur-sm bg-white/10 rounded-3xl p-8 shadow-2xl"
-                  >
-                    <div className="text-center mb-8">
-                      <h2 className="text-3xl font-bold text-white mb-4">
-                        About Gigabyte Education
-                      </h2>
-                      <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto" />
-                    </div>
-                    <div className="text-slate-300 space-y-6">
-                      <p className="leading-relaxed">
-                      Gigabyte Education Consultancy is a leading education consultancy dedicated to providing expert guidance and support to students aspiring to study abroad. With years of experience and a deep understanding of the academic landscape, we help students navigate the complex processes of university applications, visa procedures, and scholarship opportunities. Our expert team is committed to ensuring that every student receives the personalized attention and support they deserve, making their dream of studying abroad a reality.
-                      </p>
-                      <div className="grid grid-cols-2 gap-6">
-                        <div className="text-center p-4 rounded-xl bg-white/5">
-                          <h3 className="text-xl font-semibold text-indigo-400 mb-2">Our Mission</h3>
-                          <p className="text-sm">
-                            To provide expert guidance and support for students
-                            pursuing international education opportunities.
-                          </p>
-                        </div>
-                        <div className="text-center p-4 rounded-xl bg-white/5">
-                          <h3 className="text-xl font-semibold text-indigo-400 mb-2">Our Vision</h3>
-                          <p className="text-sm">
-                            To become the most trusted name in educational
-                            consulting, known for excellence and student success.
-                          </p>
-                        </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="backdrop-blur-sm bg-white/10 rounded-3xl p-8 shadow-2xl"
+                >
+                  <div className="text-center mb-8">
+                    <h2 className="text-3xl font-bold text-white mb-4">
+                      About Gigabyte Education
+                    </h2>
+                    <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto" />
+                  </div>
+                  <div className="text-slate-300 space-y-6">
+                    <p className="leading-relaxed">
+                    Gigabyte Education Consultancy is a leading education consultancy dedicated to providing expert guidance and support to students aspiring to study abroad. With years of experience and a deep understanding of the academic landscape, we help students navigate the complex processes of university applications, visa procedures, and scholarship opportunities. Our expert team is committed to ensuring that every student receives the personalized attention and support they deserve, making their dream of studying abroad a reality.
+                    </p>
+                    <div className="grid grid-cols-2 gap-6">
+                      <div className="text-center p-4 rounded-xl bg-white/5">
+                        <h3 className="text-xl font-semibold text-indigo-400 mb-2">Our Mission</h3>
+                        <p className="text-sm">
+                          To provide expert guidance and support for students
+                          pursuing international education opportunities.
+                        </p>
+                      </div>
+                      <div className="text-center p-4 rounded-xl bg-white/5">
+                        <h3 className="text-xl font-semibold text-indigo-400 mb-2">Our Vision</h3>
+                        <p className="text-sm">
+                          To become the most trusted name in educational
+                          consulting, known for excellence and student success.
+                        </p>
                       </div>
                     </div>
-                  </motion.div>
-                </div>
+                  </div>
+                </motion.div>
               </div>
             </div>
+
+            {/* Bottom Gradient */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent" />
           </section>
 
           <section ref={destinationsRef} id="destinations" className="relative min-h-screen">
