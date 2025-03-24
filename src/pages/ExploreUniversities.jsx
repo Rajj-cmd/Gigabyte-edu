@@ -86,9 +86,18 @@ const ExploreUniversities = () => {
     });
   };
 
-  const handleApplyNow = (university, e) => {
-    e.stopPropagation(); // Prevent event bubbling
+  const handleApplyNow = (university) => {
+    // Store university selection in localStorage
+    localStorage.setItem('selectedUniversity', JSON.stringify({
+      name: university.name,
+      country: university.location.split(', ').pop(),
+      program: university.programs[0]
+    }));
+
+    // Close university modal if open
     setSelectedUniversity(university);
+
+    // Open registration modal
     setIsRegisterOpen(true);
   };
 
@@ -208,19 +217,32 @@ const ExploreUniversities = () => {
                         </div>
                       </div>
 
-                      {/* Action Button */}
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={(e) => handleApplyNow(university, e)}
-                        className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 
-                          text-white py-4 rounded-xl font-semibold text-lg
-                          transition-all duration-300 hover:shadow-lg
-                          hover:shadow-indigo-500/25 flex items-center justify-center gap-2"
-                      >
-                        Apply Now
-                        <FaArrowRight className="text-sm" />
-                      </motion.button>
+                      {/* Action Buttons */}
+                      <div className="flex gap-4">
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => setSelectedUniversity(university)}
+                          className="flex-1 bg-white/5 hover:bg-white/10 text-white py-4 rounded-xl 
+                            font-semibold text-lg transition-all duration-300 flex items-center 
+                            justify-center gap-2 border border-white/10 hover:border-indigo-500/50"
+                        >
+                          Learn More
+                        </motion.button>
+
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => handleApplyNow(university)} // Use the same handler
+                          className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 
+                            text-white py-4 rounded-xl font-semibold text-lg
+                            transition-all duration-300 hover:shadow-lg
+                            hover:shadow-indigo-500/25 flex items-center justify-center gap-2"
+                        >
+                          Apply Now
+                          <FaArrowRight className="text-sm" />
+                        </motion.button>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -235,19 +257,24 @@ const ExploreUniversities = () => {
             <UniversityModal
               university={selectedUniversity}
               onClose={() => setSelectedUniversity(null)}
+              onApplyNow={handleApplyNow}
             />
           )}
         </AnimatePresence>
 
         {/* Register Modal */}
-        <RegisterModal 
-          isOpen={isRegisterOpen}
-          onClose={() => {
-            setIsRegisterOpen(false);
-            setSelectedUniversity(null);
-          }}
-          selectedUniversity={selectedUniversity}
-        />
+        <AnimatePresence>
+          {isRegisterOpen && (
+            <RegisterModal 
+              isOpen={isRegisterOpen}
+              onClose={() => {
+                setIsRegisterOpen(false);
+                setSelectedUniversity(null);
+              }}
+              selectedUniversity={selectedUniversity}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </Layout>
   );

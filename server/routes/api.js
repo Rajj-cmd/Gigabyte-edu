@@ -76,17 +76,23 @@ router.post('/contact', async (req, res) => {
 // Registration form submission
 router.post('/register', async (req, res) => {
   try {
-    console.log('Processing registration submission:', req.body);
+    console.log('Received registration data:', req.body);
     
+    if (!req.body.name || !req.body.email || !req.body.phone) {
+      return res.status(400).json({ 
+        message: 'Missing required fields' 
+      });
+    }
+
     // Save to database
     const registration = new Registration(req.body);
     const savedRegistration = await registration.save();
-    console.log('Saved registration to database:', savedRegistration._id);
+    console.log('Saved to database:', savedRegistration._id);
 
     // Send email notification
-    console.log('Sending registration email notification...');
+    console.log('Sending email notification...');
     await sendNotificationEmail(req.body, 'registration');
-    console.log('Registration email notification sent successfully');
+    console.log('Email notification sent');
 
     res.status(201).json({ 
       message: 'Registration submitted successfully',

@@ -2,16 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base styles */
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  --header-height: 4rem;
+  --content-max-width: 1800px;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* Theme Colors */
@@ -20,17 +24,16 @@ body {
   --color-secondary: #ed8936;
 }
 
-.bg-primary {
-  background-color: var(--color-primary);
+/* Base Container */
+.container {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-.text-secondary {
-  color: var(--color-secondary);
-}
-
-.bg-secondary {
-  background-color: var(--color-secondary);
-}
+/* Effects & Animations */
 .perspective-1000 {
   perspective: 1000px;
 }
@@ -38,9 +41,15 @@ body {
 .transform-style-3d {
   transform-style: preserve-3d;
 }
+
 .blur-xl {
   --tw-blur: blur(24px);
   filter: var(--tw-blur);
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .drop-shadow-2xl {
@@ -48,13 +57,8 @@ body {
   filter: var(--tw-drop-shadow);
 }
 
-/* Add these new styles for enhanced text visibility */
 .drop-shadow-glow {
   filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.5));
-}
-
-.drop-shadow-lg {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes spin-slow {
@@ -70,105 +74,92 @@ body {
   animation: spin-slow 8s linear infinite;
 }
 
-html {
-  scroll-behavior: smooth;
-  width: 100%;
-  overflow-x: hidden;
-  min-width: 320px;
-}
-
-.backdrop-blur-sm {
-  backdrop-filter: blur(8px);
-}
-.container {
-  width: 100%;
-  max-width: 1800px;
-  margin: 0 auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-/* Ensure proper backdrop blur */
-.backdrop-blur-md {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-/* Adjust text sizes for mobile */
+/* Responsive Design */
 @media (max-width: 640px) {
-  h1 {
-    font-size: 2.5rem !important;
-    line-height: 1.2 !important;
+  html {
+    font-size: 14px;
   }
-  h2 {
+
+  h1 {
     font-size: 2rem !important;
   }
-  h3 {
-    font-size: 1.5rem !important;
-  }
-  p {
-    font-size: 1rem !important;
+
+  h2 {
+    font-size: 1.75rem !important;
   }
 
-  html, body {
-    overflow-x: hidden;
-    width: 100%;
-    -webkit-tap-highlight-color: transparent;
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  /* Improve touch targets */
+  .grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  .hover\:scale-105:hover {
+    transform: none !important;
+  }
+
   button, 
   [role="button"],
   a {
     min-height: 44px;
     min-width: 44px;
   }
+}
 
-  /* Adjust spacing */
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+/* Safe Area Insets */
+@supports (padding: max(0px)) {
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 
-  /* Improve mobile grid layouts */
-  .grid {
-    gap: 1rem;
-  }
-
-  /* Better mobile scrolling */
-  .overflow-auto,
-  .overflow-y-auto {
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* Adjust modal positioning */
-  .modal-content {
-    margin: 1rem;
-    max-height: calc(100vh - 2rem);
+  .safe-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
   }
 }
 
-/* Improved touch interactions */
-@media (hover: none) {
-  .hover\:scale-105 {
-    transform: none !important;
-  }
-  
-  .hover\:shadow-lg {
-    box-shadow: none !important;
-  }
+/* Utility Classes */
+.bg-primary {
+  background-color: var(--color-primary);
 }
 
-/* Better form elements on mobile */
-input,
-select,
-textarea {
-  font-size: 16px !important; /* Prevents zoom on iOS */
+.bg-secondary {
+  background-color: var(--color-secondary);
 }
 
-/* Add smooth scrolling but disable on reduced motion preference */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+/* Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
