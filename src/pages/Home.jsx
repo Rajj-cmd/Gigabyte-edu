@@ -14,6 +14,9 @@ import SEO from '../components/SEO';
 import AnimatedLogo from '../components/AnimatedLogo';
 import PropTypes from 'prop-types';
 import graduationBg from '../assets/images/graduation.jpg';
+import ashwinImg from "../assets/images/Ashwin-Bista.png";
+import trishnaImg from "../assets/images/Trishna-Rai.png";
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -540,8 +543,8 @@ const Home = () => {
                 >
                   <div className="flex flex-col md:flex-row items-stretch">
                     <div className="flex items-center justify-center p-4 flex-shrink-0">
-                      <img
-                        src="src/assets/images/Ashwin-Bista.png"
+                       <img
+                        src={ashwinImg}
                         alt="Ashwin Bista"
                         className="max-w-full max-h-48 md:max-h-56 object-contain rounded-md"
                       />
@@ -594,7 +597,7 @@ const Home = () => {
                   <div className="flex flex-col md:flex-row items-stretch">
                     <div className="flex items-center justify-center p-4 flex-shrink-0">
                       <img
-                        src="src/assets/images/Trishna-Rai.png"
+                         src={trishnaImg}
                         alt="Trishna Rai"
                         className="max-w-full max-h-48 md:max-h-56 object-contain rounded-md"
                       />
