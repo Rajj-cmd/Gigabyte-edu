@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
             <h3 className="text-xl font-bold text-indigo-400 mb-4">Location</h3>
             <p className="text-slate-300">
               <FaMapMarkerAlt className="inline mr-2 text-indigo-400" />
-              Jamal, Kathmandu, Nepal
+              Putalisadak, Kathmandu, Nepal
             </p>
           </div>
           <div className="bg-slate-700 p-6 rounded-lg shadow-lg">
@@ -99,7 +99,7 @@ const Layout = ({ children }) => {
               <ul className="space-y-2 text-slate-300">
                 <li className="flex items-center">
                   <FaMapMarkerAlt className="mr-2 text-indigo-400" />
-                  Jamal, Kathmandu, Nepal
+                  Putalisadak, Kathmandu, Nepal
                 </li>
                 <li className="flex items-center">
                   <FaPhone className="mr-2 text-indigo-400" />

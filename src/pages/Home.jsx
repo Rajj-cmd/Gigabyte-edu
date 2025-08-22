@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
-import { FaArrowRight, FaArrowLeft, FaUniversity, FaUsers, FaGraduationCap, FaGlobeAmericas, FaArrowUp, FaLinkedin, FaMapMarkerAlt } from "react-icons/fa";
+import { FaArrowRight, FaArrowLeft, FaUniversity, FaUsers, FaGraduationCap, FaGlobeAmericas, FaArrowUp, FaLinkedin, FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import { useRef, useState, useEffect, useMemo } from "react";
 import founderImage from "../assets/images/Founder.jpg"; 
 import ApplicationProcess from '../components/ApplicationProcess';
@@ -486,8 +486,11 @@ const Home = () => {
 
         <div className="relative">
           {/* Update section refs */}
-          <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900">
-            {/* Add Image Overlay */}
+          <section 
+            ref={heroRef} 
+            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900"
+          >
+            {/* Background Image Overlay */}
             <div className="absolute inset-0 z-0">
               <img
                 src={graduationBg}
@@ -497,93 +500,156 @@ const Home = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-900/90" />
             </div>
 
-            {/* Existing hero content with higher z-index */}
-            <div className="relative z-10 container mx-auto px-4 py-24 md:py-32">
-              <div className="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto">
-                {/* Text Content */}
-                <div className="flex-1 max-w-3xl text-center md:text-left mb-12 md:mb-0">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="inline-block px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm 
-                      border border-white/20 text-sm font-medium text-indigo-300 mb-6"
-                  >
-                    Your Gateway to Global Education
-                  </motion.div>
+            {/* Decorative logo — positioned beside the Success Stories heading */}
+            <div
+              aria-hidden="true"
+              className="hidden md:block absolute left-8 top-[28%] transform -translate-y-1/2 z-10 pointer-events-none"
+            >
+              <div className="relative w-40 h-40 md:w-56 md:h-56">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/20 via-purple-500/12 to-pink-400/10 blur-2xl" />
+                <AnimatedLogo className="relative z-20 w-full h-full opacity-95 drop-shadow-2xl" />
+              </div>
+            </div>
 
-                  <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="text-4xl md:text-6xl lg:text-8xl font-bold mb-6"
-                  >
-                    <span className="text-white block mb-2">Transform Your</span>
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r 
-                      from-indigo-400 via-purple-400 to-pink-400">
-                      Future Globally
-                    </span>
-                  </motion.h1>
+            {/* Success Stories Content */}
+            <div className="relative z-20 container mx-auto px-4 py-24 md:py-32">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-4xl md:text-6xl font-bold text-center mb-8"
+              >
+                From Dreams to Reality
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
+                  Student Success Stories
+                </span>
+              </motion.h2>
 
-                  <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
-                    className="text-xl text-slate-300 mb-8 max-w-xl"
-                  >
-                    Get expert guidance and support for your international education journey. 
-                    Join thousands of successful students studying at top universities worldwide.
-                  </motion.p>
+              <p className="text-center text-slate-300 max-w-3xl mx-auto mb-12">
+                Real students. Real outcomes. See how Gigabyte Education helped students secure admissions, visas and life-changing opportunities abroad.
+              </p>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 }}
-                    className="flex flex-col sm:flex-row items-center justify-center md:justify-start 
-                      space-y-4 sm:space-y-0 sm:space-x-4"
-                  >
-                    <button
-                      onClick={() => navigate('/explore-universities')}
-                      className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 
-                        rounded-xl text-lg font-semibold text-white w-full sm:w-auto
-                        hover:shadow-lg hover:shadow-indigo-500/25 transition-all duration-300
-                        transform hover:-translate-y-1"
-                    >
-                      Explore Universities
-                    </button>
-                    <button
-                      onClick={() => navigate('/contact')} // Changed to navigate to contact page
-                      className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 
-                        rounded-xl text-lg font-semibold text-white w-full sm:w-auto
-                        hover:bg-white/20 transition-all duration-300"
-                    >
-                      Schedule a Visit →
-                    </button>
-                  </motion.div>
-                </div>
+              <div className="grid gap-8 max-w-7xl mx-auto md:grid-cols-2 items-stretch">
+                {/* Story A - horizontal card (image narrower, text wider) */}
+                <motion.article
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="group relative bg-white/6 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300"
+                >
+                  <div className="flex flex-col md:flex-row items-stretch">
+                    <div className="flex items-center justify-center p-4 flex-shrink-0">
+                      <img
+                        src="src/assets/images/Ashwin-Bista.png"
+                        alt="Ashwin Bista"
+                        className="max-w-full max-h-48 md:max-h-56 object-contain rounded-md"
+                      />
+                    </div>
+                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                    <div className="md:w-4/5 w-full p-8 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-start justify-between gap-4 mb-3">
+                          <div>
+                            <h3 className="text-2xl md:text-xl font-semibold text-white">Ashwin Bista</h3>
+                            <p className="text-sm text-slate-300">Karelia UAS • finland
+                            <span className="ml-2 text-indigo-400">🇫🇮</span>                
+                            </p>
+                          </div>
+                          <div className="text-right">
+                            <span className="inline-flex items-center bg-green-600 text-white text-sm px-3 py-1 rounded-full">
+                              <FaCheckCircle className="mr-2" />
+                              Visa Approved
+                            </span>
+                          </div>
+                        </div>
 
-                {/* Logo with Symbols - Show on larger screens */}
-                <div className="hidden md:flex flex-col items-center">
-                  {/* Adjusted size and added better container styling */}
-                  <div className="relative w-[400px] h-[400px] flex items-center justify-center">
-                    {/* Add a subtle glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-3xl" />
-                    <AnimatedLogo className="w-full h-full" />
+                        <div className="flex items-center gap-3 mb-4 text-sm text-slate-300">
+                          <span className="font-medium text-slate-200">Program:</span>
+                          <span>BSc Industrial Management</span>
+                          <span className="mx-2 text-slate-500">•</span>
+                          <span className="text-slate-400">Placement: Fall 2025</span>
+                        </div>
+
+                        <p className="text-slate-300 leading-relaxed text-base md:text-lg">
+                          “With Gigabyte’s guidance, I achieved my dream of studying Bachelor of Science Industrial Managemnt in Finland.
+                          The process felt smooth, structured and incredibly supportive.”
+                        </p>
+                      </div>
+
+                      <div className="mt-6 text-xs text-slate-400">
+                        Verified by Gigabyte
+                      </div>
+                    </div>
                   </div>
-                  {/* Improved spacing and animation for symbols */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1 }}
-                    className="flex items-center justify-center space-x-6 mt-8"
-                  >
-                    <FaGraduationCap className="text-2xl text-indigo-400 hover:text-indigo-300 transition-colors" />
-                    <FaGlobeAmericas className="text-2xl text-purple-400 hover:text-purple-300 transition-colors" />
-                    <FaUniversity className="text-2xl text-pink-400 hover:text-pink-300 transition-colors" />
-                    <FaUsers className="text-2xl text-blue-400 hover:text-blue-300 transition-colors" />
-                  </motion.div>
-                </div>
+                </motion.article>
 
+                {/* Story B - horizontal card (image narrower, text wider) */}
+                <motion.article
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.45 }}
+                  className="group relative bg-white/6 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300"
+                >
+                  <div className="flex flex-col md:flex-row items-stretch">
+                    <div className="flex items-center justify-center p-4 flex-shrink-0">
+                      <img
+                        src="src/assets/images/Trishna-Rai.png"
+                        alt="Trishna Rai"
+                        className="max-w-full max-h-48 md:max-h-56 object-contain rounded-md"
+                      />
+                    </div>
+                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                    <div className="md:w-4/5 w-full p-8 flex flex-col justify-between">
+                      <div>
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
+                          <div className="flex items-center gap-4">
+                            <div>
+                              <h3 className="text-2xl md:text-xl font-semibold text-white">Trishna Rai</h3>
+                              <p className="text-sm text-slate-300">
+                               <span className="mx-2 text-slate-400">•</span> United Kingdom <span className="ml-2">🇬🇧</span>
+                              </p>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <span className="inline-flex items-center bg-green-600 text-white text-sm px-3 py-1 rounded-full">
+                              <FaCheckCircle className="mr-2" />
+                              Visa Approved
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-slate-300">
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium text-slate-200">Program:</span>
+                            <span>BSc (Hons) Business Management</span>
+                          </div>
+
+                          <span className="text-slate-500">•</span>
+
+                          <div className="flex items-center gap-2">
+                            <FaUniversity className="text-indigo-400" />
+                            <span>Regent College London</span>
+                          </div>
+
+                          <span className="text-slate-500">•</span>
+
+                          <div className="flex items-center gap-2 text-slate-400">
+                            <span>Placement: Fall 2025</span>
+                          </div>
+                        </div>
+
+                        <p className="text-slate-300 leading-relaxed text-base md:text-lg">
+                          “Thanks to Gigabyte, I got into my dream university in United Kingdom. They supported me every step of the way — from applications to interview prep.”
+                        </p>
+                      </div>
+
+                      <div className="mt-6 text-xs text-slate-400">
+                        Student Success • Verified
+                      </div>
+                    </div>
+                  </div>
+                </motion.article>
               </div>
             </div>
           </section>
